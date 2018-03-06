@@ -18,7 +18,7 @@ namespace bangazoncli
 
                 switch (userInput.KeyChar)
                 {
-                    case '0':
+                    case '3':
                         run = false;
                         break;
 
