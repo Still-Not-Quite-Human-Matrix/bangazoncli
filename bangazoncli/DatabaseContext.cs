@@ -1,0 +1,6 @@
+﻿namespace bangazoncli
+{
+    class DatabaseContext
+    {
+    }
+}

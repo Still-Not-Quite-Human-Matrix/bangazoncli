@@ -8,7 +8,7 @@ namespace bangazoncli.Customers
 {
     class GetCustomerData
     {
-        readonly string _connectionString = ConfigurationManager.ConnectionStrings["snqhmatrixBangazon"].ConnectionString;
+        readonly string _connectionString = ConfigurationManager.ConnectionStrings["SNQHM_bangazoncli_db"].ConnectionString;
         
         public List<Customer> GetCustomerByName()
         {
