@@ -31,7 +31,7 @@ namespace bangazoncli
         {
             View mainMenu = new View()
                 .AddMenuOption("Create a customer account")
-                .AddMenuOption("Choose active customer")
+                .AddMenuOption("Choose active customer");
                 //.AddMenuOption("Create a payment option")
                 //.AddMenuOption("Add product to sell")
                 //.AddMenuOption("Add product to shopping cart")
