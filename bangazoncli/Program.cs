@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 namespace bangazoncli
 {
-    class Program
+    class Program  
+
     {
         static void Main(string[] args)
         {
             var db = SetupNewApp();
+            var customerQuery = new CreateNewCustomer();
+            var result = customerQuery.InsertCustomer("john", "doe", "1st street", "nashville", "TN", "37064", "5555555555");
 
             var run = true;
             while (run)
