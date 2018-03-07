@@ -13,10 +13,13 @@ namespace bangazoncli
 
             var db = SetupNewApp();
 
+            Customer activeCustomer = null;
+
             var run = true;
             while (run)
             {
-                cki userInput = MainMenu();
+                cki userInput = MainMenu(activeCustomer);
+
 
                 switch (userInput.KeyChar)
                 {
@@ -28,10 +31,12 @@ namespace bangazoncli
                     case '2':
                         Console.Clear();
 
-                        var CustomerDataQuery = new GetCustomerData();
-                        var CustomerData = CustomerDataQuery.GetCustomerByName();
+                        var customerDataQuery = new GetCustomerData();
+                        var customerData = customerDataQuery.GetCustomerByName();
 
-                        var activeCustomer = ChooseActiveCustomerMenu(CustomerData);
+                        var chosenCustomer = int.Parse(ChooseActiveCustomerMenu(customerData).KeyChar.ToString());
+
+                        activeCustomer = customerData[chosenCustomer - 1];
 
                         break;
                 }
@@ -45,8 +50,9 @@ namespace bangazoncli
             return db;
         }
 
-        static cki MainMenu()
+        static cki MainMenu(Customer activeCustomer)
         {
+
             View mainMenu = new View()
                 .AddMenuOption("Create a customer account")
                 .AddMenuOption("Choose active customer")
@@ -61,7 +67,14 @@ namespace bangazoncli
                 //.AddMenuOption("Show overall product popularity")
                 .AddMenuOption("Leave Bangazon!");
 
+
             Console.Write(mainMenu.GetFullMenu());
+
+            if (activeCustomer != null)
+            {
+                Console.WriteLine($"Your current active Customer is {activeCustomer.FirstName} {activeCustomer.LastName}");
+            }
+
             cki userOption = Console.ReadKey();
             return userOption;
 
@@ -69,8 +82,7 @@ namespace bangazoncli
 
         static cki ChooseActiveCustomerMenu(List<Customer> CustomerData)
         {
-            View ChooseMenu = new View();
-
+            View ChooseMenu = new View().AddMenuText("Which customer will be active?");
 
             foreach (var customer in CustomerData)
             {
