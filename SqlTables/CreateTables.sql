@@ -24,7 +24,7 @@ GO
 ********************************************************************************/
 CREATE TABLE [dbo].[Customer]
 (
-  [CustomerID] INT NOT NULL,
+  [CustomerID] INT NOT NULL IDENTITY (1, 1),
   [FirstName] VARCHAR(30) NOT NULL,
   [LastName] VARCHAR(30) NOT NULL,
   [CreatedDate] DATE NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE [dbo].[Customer]
 GO
 CREATE TABLE [DBO].[Payment]
 (
-  [PaymentID] INT NOT NULL,
+  [PaymentID] INT NOT NULL IDENTITY (1, 1),
   [PaymentType] VARCHAR(30) NOT NULL,
   [PaymentAccountNum] INT NOT NULL,
   CONSTRAINT [PK_Payment] PRIMARY KEY CLUSTERED ([PaymentID])
@@ -47,14 +47,15 @@ CREATE TABLE [DBO].[Payment]
 GO
 CREATE TABLE [dbo].[Product]
 (
-  [ProductID] INT NOT NULL,
+  [ProductID] INT NOT NULL IDENTITY (1, 1),
   [Name] VARCHAR(30) NOT NULL,
+  [Price] MONEY NOT NULL,
   CONSTRAINT [PK_Product] PRIMARY KEY CLUSTERED ([ProductID])
 );
 GO
 CREATE TABLE [dbo].[Order]
 (
-  [OrderID] INT NOT NULL,
+  [OrderID] INT NOT NULL IDENTITY (1, 1),
   [PaymentID] INT NOT NULL,
   [CustomerID] INT NOT NULL,
   CONSTRAINT [PK_Order] PRIMARY KEY CLUSTERED ([OrderID])
@@ -62,7 +63,7 @@ CREATE TABLE [dbo].[Order]
 GO
 CREATE TABLE [dbo].[OrderItem]
 (
-  [OrderItemID] INT NOT NULL,
+  [OrderItemID] INT NOT NULL IDENTITY (1, 1),
   [OrderID] INT NOT NULL,
   [ProductID] INT NOT NULL,
   CONSTRAINT [PK_OrderItem] PRIMARY KEY CLUSTERED ([OrderItemID])
