@@ -49,6 +49,7 @@ CREATE TABLE [dbo].[Product]
 (
   [ProductID] INT NOT NULL,
   [Name] VARCHAR(30) NOT NULL,
+  [Price] MONEY NOT NULL,
   CONSTRAINT [PK_Product] PRIMARY KEY CLUSTERED ([ProductID])
 );
 GO
