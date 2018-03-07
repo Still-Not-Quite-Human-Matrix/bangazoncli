@@ -1,5 +1,7 @@
 ﻿using bangazoncli.Customers;
+using bangazoncli.Models;
 using System;
+using System.Collections.Generic;
 using cki = System.ConsoleKeyInfo;
 
 namespace bangazoncli
@@ -27,14 +29,10 @@ namespace bangazoncli
                         Console.Clear();
 
                         var CustomerDataQuery = new GetCustomerData();
-
                         var CustomerData = CustomerDataQuery.GetCustomerByName();
 
-                        foreach (var customer in CustomerData)
-                        {
-                            Console.WriteLine($"{customer.FirstName} {customer.LastName}");
-                        }
-                        Console.ReadKey();
+                        var activeCustomer = ChooseActiveCustomerMenu(CustomerData);
+
                         break;
                 }
             }
@@ -64,6 +62,23 @@ namespace bangazoncli
                 .AddMenuOption("Leave Bangazon!");
 
             Console.Write(mainMenu.GetFullMenu());
+            cki userOption = Console.ReadKey();
+            return userOption;
+
+        }
+
+        static cki ChooseActiveCustomerMenu(List<Customer> CustomerData)
+        {
+            View ChooseMenu = new View();
+
+
+            foreach (var customer in CustomerData)
+            {
+                ChooseMenu.AddMenuOption($"Customer ID: {customer.CustomerID} Name: {customer.FirstName} {customer.LastName}");
+            }
+            ChooseMenu.AddMenuOption("Exit!");
+
+            Console.Write(ChooseMenu.GetFullMenu());
             cki userOption = Console.ReadKey();
             return userOption;
 
