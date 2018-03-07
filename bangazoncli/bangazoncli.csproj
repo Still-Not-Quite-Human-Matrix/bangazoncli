@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="CreateNewCustomer.cs" />
     <Compile Include="Customer.cs" />
+    <Compile Include="Customers\GetCustomerData.cs" />
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="DatabaseContext.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
