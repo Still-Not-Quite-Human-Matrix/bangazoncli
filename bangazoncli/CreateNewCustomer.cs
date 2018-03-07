@@ -15,7 +15,7 @@ namespace bangazoncli
             using (var connection = new SqlConnection(_connectionString))
             {
                 var cmd = connection.CreateCommand();
-                cmd.CommandText = @"INSERT INTO Users 
+                cmd.CommandText = @"INSERT INTO Customer 
                                 (FirstName, 
                                 LastName, 
                                 CreatedDate, 
@@ -59,7 +59,7 @@ namespace bangazoncli
                 ZipCodeParam.Value = int.Parse(zipCode);
                 cmd.Parameters.Add(ZipCodeParam);
 
-                var PhoneNumberParam = new SqlParameter("@PhoneNumber", System.Data.SqlDbType.Int);
+                var PhoneNumberParam = new SqlParameter("@PhoneNumber", System.Data.SqlDbType.VarChar);
                 PhoneNumberParam.Value = Int64.Parse(phoneNumber);
                 cmd.Parameters.Add(PhoneNumberParam);
 
