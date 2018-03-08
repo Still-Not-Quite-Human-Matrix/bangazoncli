@@ -1,6 +1,9 @@
 ﻿using bangazoncli.Customers;
 using System;
+using bangazoncli.Products;
 using cki = System.ConsoleKeyInfo;
+using bangazoncli.Models;
+using System.Collections.Generic;
 
 namespace bangazoncli
 {
@@ -21,7 +24,7 @@ namespace bangazoncli
 
                 switch (userInput.KeyChar)
                 {
-                    case '3':
+                    case '4':
                         run = false;
                         break;
 
@@ -36,6 +39,19 @@ namespace bangazoncli
                         foreach (var customer in CustomerData)
                         {
                             Console.WriteLine($"{customer.FirstName} {customer.LastName}");
+                        }
+                        Console.ReadKey();
+                        break;
+
+                    case '3':
+                        Console.Clear();
+
+                        var productQuery = new GetProductList();
+
+                        var ProductData = productQuery.GetProducts();
+                        foreach (var product in ProductData)
+                        { 
+                            Console.WriteLine($"{product.ProductName}: {product.ProductPrice}");
                         }
                         Console.ReadKey();
                         break;
@@ -59,7 +75,7 @@ namespace bangazoncli
                 //.AddMenuOption("Add product to sell")
                 //.AddMenuOption("Add product to shopping cart")
                 //.AddMenuOption("Complete an order")
-                //.AddMenuOption("Remove customer product")
+                .AddMenuOption("Remove customer product")
                 //.AddMenuOption("Update product information")
                 //.AddMenuOption("Show stale products")
                 //.AddMenuOption("Show customer revenue report")
