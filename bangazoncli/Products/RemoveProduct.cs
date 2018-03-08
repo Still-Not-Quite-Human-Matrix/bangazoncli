@@ -7,7 +7,7 @@ namespace bangazoncli
     {
         readonly string _connectionString = ConfigurationManager.ConnectionStrings["SNQHM_bangazoncli_db"].ConnectionString;
 
-        bool DeleteProduct(int productId)
+        public bool DeleteProduct(int productId)
         {
             using (var connection = new SqlConnection(_connectionString))
             {

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace bangazoncli
 {
-    class Program  
+    class Program
 
     {
         static void Main(string[] args)
@@ -45,13 +45,34 @@ namespace bangazoncli
 
                     case '3':
                         Console.Clear();
-
-                        var productQuery = new GetProductList();
-
-                        var ProductData = productQuery.GetProducts();
-                        foreach (var product in ProductData)
+                        Console.WriteLine("1: Remove Product");
+                        Console.WriteLine("2: Return to Main Menu");
+                        cki productSubSelection = Console.ReadKey();
+                        var remove = true;
+                        while (remove)
                         { 
-                            Console.WriteLine($"{product.ProductName}: {product.ProductPrice}");
+                            switch (productSubSelection.KeyChar)
+                            {
+                                case '1':
+                                    // Generate Product Menu //
+                                    var productQuery = new GetProductList();
+                                    var ProductData = productQuery.GetProducts();
+
+                                    foreach (var product in ProductData)
+                                    {
+                                        Console.WriteLine($"{product.ProductId}. {product.ProductName}: {product.ProductPrice}");
+                                    }
+
+                                    // Read Input and Remove Product bu ID // 
+                                    var selection = Console.ReadLine();
+                                    var productDelete = new RemoveProduct().DeleteProduct(int.Parse(selection));
+                                    Console.ReadKey();
+                                    break;
+                                case '2':
+                                    remove = false;
+                                    Console.ReadKey();
+                                    break;
+                            }
                         }
                         Console.ReadKey();
                         break;
