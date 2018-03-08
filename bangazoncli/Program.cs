@@ -54,6 +54,8 @@ namespace bangazoncli
                             switch (productSubSelection.KeyChar)
                             {
                                 case '1':
+                                    Console.Clear();
+                                    Console.WriteLine("Type a product id and press enter...");
                                     // Generate Product Menu //
                                     var productQuery = new GetProductList();
                                     var ProductData = productQuery.GetProducts();
@@ -63,18 +65,24 @@ namespace bangazoncli
                                         Console.WriteLine($"{product.ProductId}. {product.ProductName}: {product.ProductPrice}");
                                     }
 
-                                    // Read Input and Remove Product bu ID // 
+                                    // Read Input and Remove Product by ID // 
                                     var selection = Console.ReadLine();
                                     var productDelete = new RemoveProduct().DeleteProduct(int.Parse(selection));
+                                    if (productDelete)
+                                    {
+                                        Console.WriteLine("Product deleted press esc to relaod list");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Product not deleted or does not exist");
+                                    }
                                     Console.ReadKey();
                                     break;
                                 case '2':
                                     remove = false;
-                                    Console.ReadKey();
                                     break;
                             }
                         }
-                        Console.ReadKey();
                         break;
                 }
             }
