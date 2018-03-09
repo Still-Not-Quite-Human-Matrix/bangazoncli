@@ -1,11 +1,7 @@
 ﻿using bangazoncli.Models;
-using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace bangazoncli.Products
 {
@@ -19,8 +15,8 @@ namespace bangazoncli.Products
             {
                 connection.Open();
                 var cmd = connection.CreateCommand();
-                cmd.CommandText = @"Select [Name], [Price], [ProductID]
-                                    From [dbo].[Products]";
+                cmd.CommandText = @"SELECT [ProductID], [Name], [Price]
+                                        FROM [dbo].[Products]";
 
                 var reader = cmd.ExecuteReader();
 

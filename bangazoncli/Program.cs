@@ -42,11 +42,20 @@ namespace bangazoncli
                         break;
 
                     case '3':
-                        var ProductDataQuery = new GetProductData();
 
-                        var productData = ProductDataQuery.getProducts();
+                        var productData = new GetProductData().getProducts();
 
-                        
+                        View ProductsView = new View().AddMenuText("These are all available products.");
+
+                        foreach (var product in productData)
+                        {
+                            ProductsView.AddMenuText($"Product ID: {product.ProductID}, Name: {product.Name}, Price: {product.Price}");
+                        }
+                        ProductsView.AddMenuText("Press the any key to return to the Main Menu");
+
+                        Console.Write(ProductsView.GetFullMenu());
+
+                        Console.ReadKey();
 
                         break;
                 }
@@ -74,7 +83,7 @@ namespace bangazoncli
                 //.AddMenuOption("Show stale products")
                 //.AddMenuOption("Show customer revenue report")
                 //.AddMenuOption("Show overall product popularity")
-                .AddMenuOption("Leave Bangazon!");
+                .AddMenuText("Press [0] To Leave Bangazon!");
 
             Console.Write(mainMenu.GetFullMenu());
             cki userOption = Console.ReadKey();
