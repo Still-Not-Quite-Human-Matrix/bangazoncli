@@ -1,4 +1,5 @@
 ﻿using bangazoncli.Customers;
+using bangazoncli.Products;
 using System;
 using cki = System.ConsoleKeyInfo;
 
@@ -21,7 +22,7 @@ namespace bangazoncli
 
                 switch (userInput.KeyChar)
                 {
-                    case '3':
+                    case '0':
                         run = false;
                         break;
 
@@ -38,6 +39,15 @@ namespace bangazoncli
                             Console.WriteLine($"{customer.FirstName} {customer.LastName}");
                         }
                         Console.ReadKey();
+                        break;
+
+                    case '3':
+                        var ProductDataQuery = new GetProductData();
+
+                        var productData = ProductDataQuery.getProducts();
+
+                        
+
                         break;
                 }
             }
@@ -57,7 +67,7 @@ namespace bangazoncli
                 .AddMenuOption("Choose active customer")
                 //.AddMenuOption("Create a payment option")
                 //.AddMenuOption("Add product to sell")
-                //.AddMenuOption("Add product to shopping cart")
+                .AddMenuOption("Add product to shopping cart")
                 //.AddMenuOption("Complete an order")
                 //.AddMenuOption("Remove customer product")
                 //.AddMenuOption("Update product information")
