@@ -7,7 +7,7 @@ using cki = System.ConsoleKeyInfo;
 
 namespace bangazoncli
 {
-    class Program  
+    class Program
 
     {
         static void Main(string[] args)
@@ -53,14 +53,14 @@ namespace bangazoncli
 
                         var chosenCustomer = int.Parse(ChooseActiveCustomerMenu(customerData).KeyChar.ToString());
 
-                        if (chosenCustomer != 0 )
+                        if (chosenCustomer != 0)
                         {
                             activeCustomer = customerData[chosenCustomer - 1];
                         }
 
                         break;
 
-                    case '4':
+                    case '3':
 
                         var productData = new GetProductData().getProducts();
 
@@ -78,7 +78,7 @@ namespace bangazoncli
 
                         break;
 
-                    case '3':
+                    case '4':
 
                         Console.Clear();
                         var productQuery = new NewProduct();
@@ -91,6 +91,7 @@ namespace bangazoncli
 
                         Console.ReadLine();
                         break;
+
                 }
             }
         }
