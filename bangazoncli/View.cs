@@ -8,7 +8,14 @@ namespace bangazoncli
 {
     internal class View
     {
-        string companyName = "Still Not Quite Human Matrix Bangazon";
+        string companyName = @"
+             __. ,  ..  .  .    ,   .__.     ,      .  .              
+            (__ -+-*||  |\ | _ -+-  |  |. .*-+- _   |__|. .._ _  _.._ 
+            .__) | |||  | \|(_) |   |__\(_|| | (/,  |  |(_|[ | )(_][ )
+        ";
+
+
+        
 
         IList<string> _menuItems;
         int itemNumber = 0;
