@@ -45,7 +45,10 @@ namespace bangazoncli
 
                         var chosenCustomer = int.Parse(ChooseActiveCustomerMenu(customerData).KeyChar.ToString());
 
-                        activeCustomer = customerData[chosenCustomer - 1];
+                        if (chosenCustomer != 0 )
+                        {
+                            activeCustomer = customerData[chosenCustomer - 1];
+                        }
 
                         break;
 
