@@ -49,6 +49,7 @@
     <Compile Include="DatabaseContext.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Products\GetProductData.cs" />
+    <Compile Include="NewProduct.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View.cs" />
