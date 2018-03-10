@@ -60,7 +60,7 @@ namespace bangazoncli
 
                         break;
 
-                    case '3':
+                    case '4':
 
                         var productData = new GetProductData().getProducts();
 
