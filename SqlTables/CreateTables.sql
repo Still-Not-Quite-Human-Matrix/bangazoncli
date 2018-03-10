@@ -34,6 +34,7 @@ CREATE TABLE [dbo].[Customer]
   [State] CHAR(2) NOT NULL,
   [ZipCode] INT NOT NULL,
   [PhoneNumber] BIGINT NOT NULL,
+
   CONSTRAINT [PK_Customer] PRIMARY KEY CLUSTERED ([CustomerID])
 );
 GO
