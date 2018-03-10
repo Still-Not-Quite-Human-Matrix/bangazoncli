@@ -1,5 +1,5 @@
 ﻿using bangazoncli.Customers;
-using bangazoncli.Product;
+using bangazoncli.Products;
 using bangazoncli.Models;
 using System;
 using System.Collections.Generic;
@@ -110,7 +110,7 @@ namespace bangazoncli
                 .AddMenuOption("Create a customer account")
                 .AddMenuOption("Choose active customer")
                 //.AddMenuOption("Create a payment option")
-                .AddMenuOption("Add product to shopping cart")
+                .AddMenuOption("(Under Construction, Only displays products) Add product to shopping cart")
                 .AddMenuOption("Add product to sell")
                 //.AddMenuOption("Complete an order")
                 //.AddMenuOption("Remove customer product")
