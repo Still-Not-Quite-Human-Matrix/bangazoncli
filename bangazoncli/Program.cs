@@ -16,7 +16,12 @@ namespace bangazoncli
             var customerQuery = new CreateNewCustomer();
             var result = customerQuery.InsertCustomer("john", "doe", "1st street", "nashville", "TN", "37064", "5555555555");
 
+
+            var productQuery = new NewProduct();
+            var productResult = productQuery.InsertProduct("Shoe", "$40");
+
             Customer activeCustomer = null;
+
 
             var run = true;
             while (run)
