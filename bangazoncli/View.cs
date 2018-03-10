@@ -24,6 +24,13 @@ namespace bangazoncli
         {
             _menuItems = new List<string> {companyName};
         }
+        internal View AddMenuText(string text)
+        {
+            var menuText = $"{Environment.NewLine}{text}{Environment.NewLine}";
+            _menuItems.Add(menuText);
+
+            return this;
+        }
 
         internal View AddMenuOption(string menuItem)
         {
