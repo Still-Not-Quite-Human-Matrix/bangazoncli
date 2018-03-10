@@ -1,0 +1,11 @@
+INSERT INTO [dbo].[Product] ([Name],[Price]) VALUES (N'Vienna Sausage',14)
+INSERT INTO [dbo].[Product] ([Name],[Price]) VALUES (N'Princess Diana Beanie Baby',200000)
+INSERT INTO [dbo].[Product] ([Name],[Price]) VALUES (N'A Somewhat Used Tire',53)
+INSERT INTO [dbo].[Product] ([Name],[Price]) VALUES (N'Sound Machine',72)
+INSERT INTO [dbo].[Product] ([Name],[Price]) VALUES (N'Alexs Soul',14000000)
+INSERT INTO [dbo].[Product] ([Name],[Price]) VALUES (N'Frozen Super Size Fries',4)
+INSERT INTO [dbo].[Product] ([Name],[Price]) VALUES (N'Lava Lamp',12)
+INSERT INTO [dbo].[Product] ([Name],[Price]) VALUES (N'Inflatable Unicorn Hat',6)
+INSERT INTO [dbo].[Product] ([Name],[Price]) VALUES (N'Everlasting Dry Erase Markers',204)
+INSERT INTO [dbo].[Product] ([Name],[Price]) VALUES (N'Adams MacBook',100)
+
