@@ -1,5 +1,5 @@
 ﻿using bangazoncli.Customers;
-using bangazoncli.Products;
+using bangazoncli.Product;
 using bangazoncli.Models;
 using System;
 using System.Collections.Generic;

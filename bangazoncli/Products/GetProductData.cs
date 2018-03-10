@@ -16,7 +16,7 @@ namespace bangazoncli.Products
                 connection.Open();
                 var cmd = connection.CreateCommand();
                 cmd.CommandText = @"SELECT [ProductID], [Name], [Price]
-                                        FROM [dbo].[Products]";
+                                        FROM [dbo].[Product]";
 
                 var reader = cmd.ExecuteReader();
 
