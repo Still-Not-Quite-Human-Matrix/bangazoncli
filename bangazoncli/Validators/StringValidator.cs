@@ -4,7 +4,7 @@ namespace bangazoncli.Validators
 {
     public class StringValidator
     {
-        public static void Main()
+        public static void validator()
         {
             string[] customerStrings = { "" };
             Regex rgx = new Regex(@"^[A-Z][a-zA-Z]*$");
