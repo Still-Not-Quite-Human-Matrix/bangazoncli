@@ -1,4 +1,5 @@
 ﻿using bangazoncli.Customers;
+using bangazoncli.Products;
 using bangazoncli.Models;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using cki = System.ConsoleKeyInfo;
 
 namespace bangazoncli
 {
-    class Program  
+    class Program
 
     {
         static void Main(string[] args)
@@ -25,8 +26,7 @@ namespace bangazoncli
 
                 switch (userInput.KeyChar)
                 {
-
-                    case '4':
+                    case '0':
                         run = false;
                         break;
 
@@ -53,11 +53,32 @@ namespace bangazoncli
 
                         var chosenCustomer = int.Parse(ChooseActiveCustomerMenu(customerData).KeyChar.ToString());
 
-                        activeCustomer = customerData[chosenCustomer - 1];
+                        if (chosenCustomer != 0)
+                        {
+                            activeCustomer = customerData[chosenCustomer - 1];
+                        }
 
                         break;
 
                     case '3':
+
+                        var productData = new GetProductData().getProducts();
+
+                        View ProductsView = new View().AddMenuText("These are all available products.");
+
+                        foreach (var product in productData)
+                        {
+                            ProductsView.AddMenuText($"Product ID: {product.ProductID}, Name: {product.Name}, Price: {product.Price}");
+                        }
+                        ProductsView.AddMenuText("Press the any key to return to the Main Menu");
+
+                        Console.Write(ProductsView.GetFullMenu());
+
+                        Console.ReadKey();
+
+                        break;
+
+                    case '4':
 
                         Console.Clear();
                         var productQuery = new NewProduct();
@@ -70,6 +91,7 @@ namespace bangazoncli
 
                         Console.ReadLine();
                         break;
+
                 }
             }
         }
@@ -88,15 +110,15 @@ namespace bangazoncli
                 .AddMenuOption("Create a customer account")
                 .AddMenuOption("Choose active customer")
                 //.AddMenuOption("Create a payment option")
+                .AddMenuOption("(Under Construction, Only displays products) Add product to shopping cart")
                 .AddMenuOption("Add product to sell")
-                //.AddMenuOption("Add product to shopping cart")
                 //.AddMenuOption("Complete an order")
                 //.AddMenuOption("Remove customer product")
                 //.AddMenuOption("Update product information")
                 //.AddMenuOption("Show stale products")
                 //.AddMenuOption("Show customer revenue report")
                 //.AddMenuOption("Show overall product popularity")
-                .AddMenuOption("Leave Bangazon!");
+                .AddMenuText("Press [0] To Leave Bangazon!");
 
 
             Console.Write(mainMenu.GetFullMenu());
