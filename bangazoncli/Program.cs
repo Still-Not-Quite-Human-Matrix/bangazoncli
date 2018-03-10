@@ -14,12 +14,6 @@ namespace bangazoncli
         {
 
             var db = SetupNewApp();
-            var customerQuery = new CreateNewCustomer();
-            var result = customerQuery.InsertCustomer("john", "doe", "1st street", "nashville", "TN", "37064", "5555555555");
-
-
-            var productQuery = new NewProduct();
-            var productResult = productQuery.InsertProduct("Shoe", "$40");
 
             Customer activeCustomer = null;
 
@@ -36,6 +30,20 @@ namespace bangazoncli
                         run = false;
                         break;
 
+                    case '1':
+                        Console.Clear();
+
+                        var customerQuery = new CreateNewCustomer();
+                        var result = customerQuery.InsertCustomer("john", "doe", "1st street", "nashville", "TN", "37064", "5555555555");
+
+                        if (result)
+                        {
+                            Console.WriteLine("Customer added successfully.");
+                        }
+
+                        Console.ReadLine();
+
+                        break;
 
                     case '2':
                         Console.Clear();
@@ -69,6 +77,20 @@ namespace bangazoncli
                         Console.ReadKey();
 
                         break;
+
+                    case '3':
+
+                        Console.Clear();
+                        var productQuery = new NewProduct();
+                        var productResult = productQuery.InsertProduct("Shoe", "$40");
+
+                        if (productResult)
+                        {
+                            Console.WriteLine("Product added successfully.");
+                        }
+
+                        Console.ReadLine();
+                        break;
                 }
             }
         }
@@ -87,8 +109,8 @@ namespace bangazoncli
                 .AddMenuOption("Create a customer account")
                 .AddMenuOption("Choose active customer")
                 //.AddMenuOption("Create a payment option")
-                //.AddMenuOption("Add product to sell")
                 .AddMenuOption("Add product to shopping cart")
+                .AddMenuOption("Add product to sell")
                 //.AddMenuOption("Complete an order")
                 //.AddMenuOption("Remove customer product")
                 //.AddMenuOption("Update product information")

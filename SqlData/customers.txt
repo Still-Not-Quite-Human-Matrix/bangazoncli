@@ -1,7 +1,0 @@
-CustomerID,FirstName,LastName,CreatedDate,LastActiveDate,StreetAddress,City,State,ZipCode,PhoneNumber
-0,Alex,Sanchez,2018-03-05,2019-03-05,900 Gallatin road,Nashville,TN,37206,0
-1,Ken,Lewis,2018-03-05,2018-03-05,300 Spartan drive,Sparta,TN,30201,0
-2,Gina,Antonini,2018-03-05,2018-03-05,101 Loony Toons road,Wichata,KS,50520,0
-3,Matt,Hensley,2018-03-05,2018-03-05,500 Interstate blvd S,Nashville,TN,37201,0
-4,Adam,Smith,2018-03-06,2018-03-06,123 Superman Ln S,Tacoma,WA,98704,0
-5,Tony,Tiger,1971-05-04,2017-05-09,521 Place Ln,Chicago,IL,60477,0
