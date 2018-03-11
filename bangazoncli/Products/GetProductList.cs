@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using bangazoncli.Models;
 
@@ -10,14 +11,19 @@ namespace bangazoncli.Products
         readonly string _connectionString = ConfigurationManager.ConnectionStrings["SNQHM_bangazoncli_db"].ConnectionString;
 
         //this will need to be a get products by customer query at this time it returns all products in the DB
-        public List<Product> GetProducts()
+        public List<Product> GetProducts(int custID)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 var cmd = connection.CreateCommand();
                 cmd.CommandText = @"select *
-                                    from Product";
+                                    from Product
+                                    where Owner = @custID";
+
+                var custIDParam = new SqlParameter("@custID", SqlDbType.NVarChar);
+                custIDParam.Value = custID;
+                cmd.Parameters.Add(custIDParam);
 
                 var reader = cmd.ExecuteReader();
 
@@ -38,5 +44,6 @@ namespace bangazoncli.Products
                 return products;
             }
         }
+        
     }
 }
