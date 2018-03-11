@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace bangazoncli.Models
 {
-    class Product
+    class order
     {
-        public int ProductID { get; set; }
-        public string Name { get; set; }
-        public decimal Price { get; set; }
     }
 }

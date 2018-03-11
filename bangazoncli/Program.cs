@@ -51,9 +51,9 @@ namespace bangazoncli
                         var customerDataQuery = new GetCustomerData();
                         var customerData = customerDataQuery.GetCustomerByName();
 
-                        var chosenCustomer = int.Parse(ChooseActiveCustomerMenu(customerData).KeyChar.ToString());
+                        var chosenCustomer = int.Parse(ChooseActiveCustomerMenu(customerData));
 
-                        if (chosenCustomer != 0)
+                        if (chosenCustomer != 0 && chosenCustomer < customerData.Count + 1)
                         {
                             activeCustomer = customerData[chosenCustomer - 1];
                         }
@@ -61,20 +61,36 @@ namespace bangazoncli
                         break;
 
                     case '3':
+                        var runThisMenu = true;
 
-                        var productData = new GetProductData().getProducts();
-
-                        View ProductsView = new View().AddMenuText("These are all available products.");
-
-                        foreach (var product in productData)
+                        if (activeCustomer != null)
                         {
-                            ProductsView.AddMenuText($"Product ID: {product.ProductID}, Name: {product.Name}, Price: {product.Price}");
+
+                            while (runThisMenu)
+                            {
+
+                                var productDataQuery = new GetProductData();
+                                var productData = productDataQuery.getProducts();
+
+                                var chosenInput = int.Parse(ChooseProductMenu(productData));
+
+                                if (chosenInput != 0)
+                                {
+                                    var itemToAdd = SetupOrderItem(chosenInput, productData, activeCustomer);
+
+                                    var createOrderItem = new CreateNewOrderItem();
+
+                                    var orderItemResult = createOrderItem.InsertOrderItem(itemToAdd.OrderID, itemToAdd.ProductID);
+
+                                    Console.WriteLine($"Item {itemToAdd.ProductID} successfully added to {activeCustomer.FirstName} {activeCustomer.LastName}'s order");
+                                }
+                                else
+                                {
+                                    runThisMenu = false;
+                                }
+
+                            }
                         }
-                        ProductsView.AddMenuText("Press the any key to return to the Main Menu");
-
-                        Console.Write(ProductsView.GetFullMenu());
-
-                        Console.ReadKey();
 
                         break;
 
@@ -126,6 +142,9 @@ namespace bangazoncli
             if (activeCustomer != null)
             {
                 Console.WriteLine($"Your current active Customer is {activeCustomer.FirstName} {activeCustomer.LastName}");
+            } else
+            {
+                Console.WriteLine("No active customer set");
             }
 
             cki userOption = Console.ReadKey();
@@ -133,20 +152,62 @@ namespace bangazoncli
 
         }
 
-        static cki ChooseActiveCustomerMenu(List<Customer> CustomerData)
+        static string ChooseActiveCustomerMenu(List<Customer> customerData)
         {
             View ChooseMenu = new View().AddMenuText("Which customer will be active?");
 
-            foreach (var customer in CustomerData)
+            foreach (var customer in customerData)
             {
                 ChooseMenu.AddMenuOption($"Customer ID: {customer.CustomerID} Name: {customer.FirstName} {customer.LastName}");
             }
-            ChooseMenu.AddMenuOption("Exit!");
+            ChooseMenu.AddMenuText("0. Return to Main Menu");
 
             Console.Write(ChooseMenu.GetFullMenu());
-            cki userOption = Console.ReadKey();
+            string userOption = Console.ReadLine();
             return userOption;
 
+        }
+
+        static string ChooseProductMenu(List<Product> productData)
+        {
+
+            View ProductsView = new View().AddMenuText("These are all available products.");
+
+            foreach (var product in productData)
+            {
+                ProductsView.AddMenuOption($"Product ID: {product.ProductID}, Name: {product.Name}, Price: {product.Price}");
+            }
+
+            ProductsView.AddMenuText("0. Done adding products");
+
+            Console.Write(ProductsView.GetFullMenu());
+            string userOption = Console.ReadLine();
+
+            return userOption;
+        }
+
+        
+        static OrderItem SetupOrderItem(int userInput, List<Product> productData, Customer activeCustomer)
+        {
+
+            /* If an order with a matching CustomerID exists 
+             * then add this item to that order
+             * 
+             * Else
+             * insert new Order
+             * leave an open spot for paymentID
+             * add activeCustomer.CustomerID
+             * Use this new OrderID when creating an orderItem
+            */
+
+
+            var chosenProduct = new OrderItem
+            {
+                ProductID = productData[userInput - 1].ProductID,
+                //OrderID = 
+            };
+
+            return chosenProduct;
         }
     }
 }
