@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Configuration;
 
-namespace bangazoncli
+namespace bangazoncli.Customers
 {
     class CreateNewCustomer
     {
         readonly string _connectionString = ConfigurationManager.ConnectionStrings["SNQHM_bangazoncli_db"].ConnectionString;
+
 
 
         public bool InsertCustomer(string firstName, string lastName, string streetAddress, string city, string state, string zipCode, string phoneNumber)
@@ -69,11 +70,43 @@ namespace bangazoncli
                 var result = cmd.ExecuteNonQuery();
 
                 return result == 1;
-
-                
+               
             }
-
-
+            
         }
+    
+    }
+
+    public class Test
+    {
+        public static bool Testy()
+        {
+            var customerQuery = new CreateNewCustomer();
+
+            Console.WriteLine("Please type your first name:");
+            var firstName = Console.ReadLine();
+
+            Console.WriteLine("Type your last name:");
+            var lastName = Console.ReadLine();
+
+            Console.WriteLine("Type your street address:");
+            var streetAddress = Console.ReadLine();
+
+            Console.WriteLine("City:");
+            var city = Console.ReadLine();
+
+            Console.WriteLine("State:");
+            var state = Console.ReadLine();
+
+            Console.WriteLine("Zip Code:");
+            var zipCode = Console.ReadLine();
+
+            Console.WriteLine("Phone Number:");
+            var phoneNumber = Console.ReadLine();
+
+            var result = customerQuery.InsertCustomer(firstName, lastName, streetAddress, city, state, zipCode, phoneNumber);
+            return result;
+        }
+       
     }
 }

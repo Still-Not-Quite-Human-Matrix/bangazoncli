@@ -33,10 +33,8 @@ namespace bangazoncli
                     case '1':
                         Console.Clear();
 
-                        var customerQuery = new CreateNewCustomer();
-                        var result = customerQuery.InsertCustomer("john", "doe", "1st street", "nashville", "TN", "37064", "5555555555");
-
-                        if (result)
+                        
+                        if (Test.Testy())
                         {
                             Console.WriteLine("Customer added successfully.");
                         }
@@ -148,6 +146,7 @@ namespace bangazoncli
             return userOption;
 
         }
+
     }
 }
 
