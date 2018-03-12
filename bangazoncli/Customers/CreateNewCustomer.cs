@@ -105,6 +105,9 @@ namespace bangazoncli.Customers
             var phoneNumber = Console.ReadLine();
 
             var result = customerQuery.InsertCustomer(firstName, lastName, streetAddress, city, state, zipCode, phoneNumber);
+
+            Console.WriteLine("Type [0] to return to the main menu.");
+
             return result;
         }
        
