@@ -13,15 +13,16 @@ namespace bangazoncli
     {
         readonly string _connectionString = ConfigurationManager.ConnectionStrings["SNQHM_bangazoncli_db"].ConnectionString;
 
-        public bool InsertProduct(string name, string price)
+        public bool InsertProduct(string name, string price, int owner)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
                 var cmd = connection.CreateCommand();
                 cmd.CommandText = @"INSERT INTO Product 
                                 (Name,
-                                 Price)
-                                VALUES (@Name, @Price)";
+                                 Price,
+                                 Owner)
+                                VALUES (@Name, @Price, @Owner)";
 
 
                 var NameParam = new SqlParameter("@Name", System.Data.SqlDbType.NVarChar);
@@ -32,6 +33,9 @@ namespace bangazoncli
                 PriceParam.Value = price;
                 cmd.Parameters.Add(PriceParam);
 
+                var OwnerParam = new SqlParameter("@Owner", System.Data.SqlDbType.Int);
+                OwnerParam.Value = owner;
+                cmd.Parameters.Add(OwnerParam);
 
                 connection.Open();
 

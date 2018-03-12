@@ -82,7 +82,7 @@ namespace bangazoncli
 
                         Console.Clear();
                         var productQuery = new NewProduct();
-                        var productResult = productQuery.InsertProduct("Shoe", "$40");
+                        var productResult = productQuery.InsertProduct("Shoe", "$40", 1);
 
                         if (productResult)
                         {
