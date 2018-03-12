@@ -27,7 +27,7 @@ namespace bangazoncli.Products
                     var product = new Product
                     {
                         Name = reader["Name"].ToString(),
-                        Price = decimal.Parse(reader["price"].ToString()),
+                        Price = double.Parse(reader["price"].ToString()),
                         ProductID = int.Parse(reader["ProductID"].ToString())
                     };
 
