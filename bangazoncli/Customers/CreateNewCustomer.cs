@@ -77,9 +77,9 @@ namespace bangazoncli.Customers
     
     }
 
-    public class Test
+    public class TheCustomerAccountMaker
     {
-        public static bool Testy()
+        public static bool CustomerCreator()
         {
             var customerQuery = new CreateNewCustomer();
 

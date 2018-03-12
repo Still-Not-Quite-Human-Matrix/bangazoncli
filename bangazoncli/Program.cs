@@ -8,21 +8,16 @@ using cki = System.ConsoleKeyInfo;
 namespace bangazoncli
 {
     class Program
-
     {
         static void Main(string[] args)
         {
-
             var db = SetupNewApp();
-
             Customer activeCustomer = null;
-
 
             var run = true;
             while (run)
             {
                 cki userInput = MainMenu(activeCustomer);
-
 
                 switch (userInput.KeyChar)
                 {
@@ -33,8 +28,7 @@ namespace bangazoncli
                     case '1':
                         Console.Clear();
 
-                        
-                        if (Test.Testy())
+                        if (TheCustomerAccountMaker.CustomerCreator())
                         {
                             Console.WriteLine("Customer added successfully.");
                         }
@@ -171,7 +165,7 @@ namespace bangazoncli
                 //.AddMenuOption("Create a payment option")
                 .AddMenuOption("(Under Construction, Only displays products) Add product to shopping cart")
                 .AddMenuOption("Add product to sell");
-            //.AddMenuOption("Complete an order")
+                //.AddMenuOption("Complete an order")
             if (activeCustomer != null)
             {
                 mainMenu.AddMenuOption($"Remove product(s) from {activeCustomer.FirstName} {activeCustomer.LastName}");
@@ -186,7 +180,6 @@ namespace bangazoncli
             //.AddMenuOption("Show overall product popularity")
             mainMenu.AddMenuText("Press [0] To Leave Bangazon!");
 
-
             Console.Write(mainMenu.GetFullMenu());
 
             if (activeCustomer != null)
@@ -196,7 +189,6 @@ namespace bangazoncli
 
             cki userOption = Console.ReadKey();
             return userOption;
-
         }
 
         static cki ChooseActiveCustomerMenu(List<Customer> CustomerData)
@@ -212,7 +204,6 @@ namespace bangazoncli
             Console.Write(ChooseMenu.GetFullMenu());
             cki userOption = Console.ReadKey();
             return userOption;
-
         }
 
     }
