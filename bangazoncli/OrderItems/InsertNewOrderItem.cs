@@ -3,7 +3,7 @@ using System.Configuration;
 
 namespace bangazoncli
 {
-    class CreateNewOrderItem
+    class InsertNewOrderItem
     {
         readonly string _connectionString = ConfigurationManager.ConnectionStrings["SNQHM_bangazoncli_db"].ConnectionString;
 

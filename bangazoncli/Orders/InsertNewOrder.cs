@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace bangazoncli.Orders
 {
-    class CreateNewOrder
+    class InsertNewOrder
     {
     }
 }

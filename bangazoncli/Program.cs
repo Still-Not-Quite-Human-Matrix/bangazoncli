@@ -1,5 +1,6 @@
 ﻿using bangazoncli.Customers;
 using bangazoncli.Products;
+using bangazoncli.Orders;
 using bangazoncli.Models;
 using System;
 using System.Collections.Generic;
@@ -69,21 +70,38 @@ namespace bangazoncli
                             while (runThisMenu)
                             {
 
+                                // Show the user all the products in the store
                                 var productDataQuery = new GetProductData();
                                 var productData = productDataQuery.getProducts();
 
+                                // When the user chooses from the menu, make it an int instead of a string (from console.readline)
                                 var chosenInput = int.Parse(ChooseProductMenu(productData));
 
+                                // 0 is the option to return to the main menu, so if anything else was chosen...
                                 if (chosenInput != 0)
                                 {
-                                    var itemToAdd = SetupOrderItem(chosenInput, productData, activeCustomer);
 
-                                    var createOrderItem = new CreateNewOrderItem();
+                                    // Send the user's option as an int, the list of products, and the user's info along to be made into an OrderItem
+                                    // We need the user's info to see their Order
+                                    // this will return the formatted OrderItem, not yet Inserted
+                                    var orderItemToAdd = SetupOrderItem(chosenInput, productData, activeCustomer);
 
-                                    var orderItemResult = createOrderItem.InsertOrderItem(itemToAdd.OrderID, itemToAdd.ProductID);
+                                    // Now we make complete the insert, sending the formatted OrderItem we made above
+                                    var orderInsert = new InsertNewOrderItem();
+                                    var orderItemResult = orderInsert.InsertOrderItem(orderItemToAdd.OrderID, orderItemToAdd.ProductID);
 
-                                    Console.WriteLine($"Item {itemToAdd.ProductID} successfully added to {activeCustomer.FirstName} {activeCustomer.LastName}'s order");
+                                    // When it inserts successfully or not we'll tell the user they did it or didn't do it
+                                    if (orderItemResult)
+                                    {
+                                        Console.WriteLine($"Item {orderItemToAdd.ProductID} successfully added to {activeCustomer.FirstName} {activeCustomer.LastName}'s order");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Could not add product");
+                                    }
                                 }
+
+                                // The above menu will live on until the user hits 0 to leave this menu
                                 else
                                 {
                                     runThisMenu = false;
@@ -189,24 +207,32 @@ namespace bangazoncli
         
         static OrderItem SetupOrderItem(int userInput, List<Product> productData, Customer activeCustomer)
         {
+            // First, we need to see if the user has an Order with us already (we are only allowing one order per customer here)
+            var customerOrdersData = new GetOrderData();
+            var customerOrder = customerOrdersData.GetOrderByCustomerID(activeCustomer.CustomerID);
 
-            /* If an order with a matching CustomerID exists 
-             * then add this item to that order
-             * 
-             * Else
-             * insert new Order
-             * leave an open spot for paymentID
-             * add activeCustomer.CustomerID
-             * Use this new OrderID when creating an orderItem
-            */
+            // In the case they do not have an order with us...
+            if (customerOrder == null)
+            {
+                // We will create new order
+                // Hard code a PaymentID for now
+                // Then set this new order to customerOrder. Doing this we set the variable that was 'null' to an actual order, so we can proceed.
+            }
 
+            // At this point we know the customer has an order so we can continue to add orderItem to that order
 
+            // The function that's calling this one will be adding this OrderItem to our DB.
+            // Which means what we have to do here is add the ProductID, so we know what they're buying, and the OrderID, so we know what they have in their 'cart'
             var chosenProduct = new OrderItem
             {
                 ProductID = productData[userInput - 1].ProductID,
-                //OrderID = 
+                OrderID = customerOrder.OrderID
             };
 
+
+
+
+            // Now this chosenProduct is an OrderItem that will carry the product and order ID's along
             return chosenProduct;
         }
     }

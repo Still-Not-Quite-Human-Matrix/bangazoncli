@@ -47,11 +47,12 @@
     <Compile Include="Customers\GetCustomerData.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="DatabaseContext.cs" />
-    <Compile Include="Models\order.cs" />
+    <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderItem.cs" />
     <Compile Include="Models\Product.cs" />
-    <Compile Include="OrderItems\CreateNewOrderItem.cs" />
-    <Compile Include="Orders\CreateNewOrder.cs" />
+    <Compile Include="OrderItems\InsertNewOrderItem.cs" />
+    <Compile Include="Orders\InsertNewOrder.cs" />
+    <Compile Include="Orders\GetOrderData.cs" />
     <Compile Include="Products\GetProductData.cs" />
     <Compile Include="NewProduct.cs" />
     <Compile Include="Program.cs" />
