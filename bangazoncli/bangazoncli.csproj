@@ -50,6 +50,8 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Products\GetProductData.cs" />
     <Compile Include="NewProduct.cs" />
+    <Compile Include="Products\GetProductList.cs" />
+    <Compile Include="Products\RemoveProduct.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validators\StringValidator.cs" />

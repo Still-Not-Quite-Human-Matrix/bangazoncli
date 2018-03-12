@@ -35,7 +35,7 @@ namespace bangazoncli.Products
                     {
                         ProductID = int.Parse(reader["ProductId"].ToString()),
                         Name = reader["Name"].ToString(),
-                        Price = decimal.Parse(reader["Price"].ToString()),
+                        Price = double.Parse(reader["Price"].ToString()),
                     };
 
                     products.Add(product);
