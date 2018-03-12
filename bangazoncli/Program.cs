@@ -90,6 +90,67 @@ namespace bangazoncli
                         Console.ReadLine();
                         break;
 
+                    case '5':
+                        if (activeCustomer != null)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("1: Remove Product");
+                            Console.WriteLine("2: Return to Main Menu");
+                            cki productSubSelection = Console.ReadKey();
+                            var remove = true;
+                            while (remove)
+                            {
+                                switch (productSubSelection.KeyChar)
+                                {
+                                    case '0':
+                                        remove = false;
+                                        break;
+
+                                    case '1':
+                                        Console.Clear();
+                                        Console.WriteLine("Type a product id and press enter...");
+                                        // Generate Product Menu //
+                                        var customerProducts = new GetProductList();
+                                        var ProductData = customerProducts.GetProducts(activeCustomer.CustomerID);
+
+                                        foreach (var product in ProductData)
+                                        {
+                                            Console.WriteLine($"{product.ProductID}. {product.Name}: {product.Price}");
+                                        }
+                                        Console.WriteLine("\nPress [0] to return to the main menu");
+
+                                        // Read Input and Remove Product by ID // 
+                                        var selection = Console.ReadLine();
+                                        var productDelete = new RemoveProduct().DeleteProduct(int.Parse(selection));
+                                        if (int.Parse(selection) == 0)
+                                        {
+                                            remove = false;
+                                        }
+                                        else if (productDelete)
+                                        {
+                                            Console.WriteLine("Product deleted press enter to relaod list");
+                                            Console.ReadKey();
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Product not deleted or does not exist");
+                                        }
+                                        //Console.ReadKey();
+                                        break;
+
+                                    case '2':
+                                        remove = false;
+                                        break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine(" Please Select a Customer First. Press [enter] to try again.");
+                            Console.ReadKey();
+                        }
+
+                        break;
                 }
             }
         }
@@ -109,14 +170,21 @@ namespace bangazoncli
                 .AddMenuOption("Choose active customer")
                 //.AddMenuOption("Create a payment option")
                 .AddMenuOption("(Under Construction, Only displays products) Add product to shopping cart")
-                .AddMenuOption("Add product to sell")
-                //.AddMenuOption("Complete an order")
-                //.AddMenuOption("Remove customer product")
-                //.AddMenuOption("Update product information")
-                //.AddMenuOption("Show stale products")
-                //.AddMenuOption("Show customer revenue report")
-                //.AddMenuOption("Show overall product popularity")
-                .AddMenuText("Press [0] To Leave Bangazon!");
+                .AddMenuOption("Add product to sell");
+            //.AddMenuOption("Complete an order")
+            if (activeCustomer != null)
+            {
+                mainMenu.AddMenuOption($"Remove product(s) from {activeCustomer.FirstName} {activeCustomer.LastName}");
+            }
+            else
+            {
+                mainMenu.AddMenuOption($"Select a customer to remove product(s)");
+            };
+            //.AddMenuOption("Update product information")
+            //.AddMenuOption("Show stale products")
+            //.AddMenuOption("Show customer revenue report")
+            //.AddMenuOption("Show overall product popularity")
+            mainMenu.AddMenuText("Press [0] To Leave Bangazon!");
 
 
             Console.Write(mainMenu.GetFullMenu());
