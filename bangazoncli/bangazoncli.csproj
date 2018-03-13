@@ -51,10 +51,8 @@
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderItem.cs" />
     <Compile Include="Models\Product.cs" />
-    <Compile Include="OrderItems\CreateNewOrderItem.cs" />
     <Compile Include="OrderItems\RemoveOrderItemsFromList.cs" />
     <Compile Include="OrderItems\ShowOrderItems.cs" />
-    <Compile Include="Orders\GetOrderData.cs" />
     <Compile Include="Products\GetProductData.cs" />
     <Compile Include="Products\NewProduct.cs" />
     <Compile Include="Products\GetProductList.cs" />

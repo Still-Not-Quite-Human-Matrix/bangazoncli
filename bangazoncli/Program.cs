@@ -60,41 +60,41 @@ namespace bangazoncli
 
                         if (activeCustomer != null)
                         {
-                        Console.Clear();
+                            Console.Clear();
 
-                        if (ThePaymentTypeCreator.PaymentCreator())
-                        {
-                            Console.WriteLine("Payment added successfully.");
+                            if (ThePaymentTypeCreator.PaymentCreator())
+                            {
+                                Console.WriteLine("Payment added successfully.");
+                            }
                         }
+                            Console.ReadLine();
 
-                        Console.ReadLine();
-
-                        break;
+                            break;
 
                     case '4':
 
                         var runThisMenu = true;
 
-                            while (runThisMenu)
+                        while (runThisMenu)
+                        {
+
+                            var productDataQuery = new GetProductData();
+                            productData = productDataQuery.getProducts();
+
+                            var chosenInput = int.Parse(ChooseProductMenu(productData));
+
+                            if (chosenInput != 0)
                             {
-
-                                var productDataQuery = new GetProductData();
-                                var productData = productDataQuery.getProducts();
-
-                                var chosenInput = int.Parse(ChooseProductMenu(productData));
-
-                                if (chosenInput != 0)
-                                {
-                                    var chosenProduct = productData[chosenInput - 1];
-                                    listOfOrderItems.Add(chosenProduct);
-                                }
-                                else
-                                {
-                                    runThisMenu = false;
-                                }
-
+                                var chosenProduct = productData[chosenInput - 1];
+                                listOfOrderItems.Add(chosenProduct);
                             }
+                            else
+                            {
+                                runThisMenu = false;
+                            }
+
                         }
+
 
                         break;
 
@@ -173,19 +173,18 @@ namespace bangazoncli
 
                         break;
 
-                                            case '7':
+                    case '7':
 
                         if (listOfOrderItems.Count > 0)
                         {
-                        var itemsList = new ShowOrderItems();
-                        itemsList.ShowListOfItems(listOfOrderItems);
+                            var itemsList = new ShowOrderItems();
+                            itemsList.ShowListOfItems(listOfOrderItems);
                         }
                         else
                         {
                             Console.WriteLine("sorry no items in cart");
                         }
 
-                        Console.ReadLine();
                         break;
 
                     case '8':
@@ -199,6 +198,8 @@ namespace bangazoncli
                         {
                             Console.WriteLine("sorry no items in cart");
                         }
+                        break;
+
                 }
             }
         }
@@ -232,9 +233,10 @@ namespace bangazoncli
             //.AddMenuOption("Show stale products")
             //.AddMenuOption("Show customer revenue report")
             //.AddMenuOption("Show overall product popularity")
+            mainMenu
                 .AddMenuOption("See products in customer cart")
                 .AddMenuOption("Remove products in customer cart")
-            mainMenu.AddMenuText("Press [0] To Leave Bangazon!");
+                .AddMenuText("Press [0] To Leave Bangazon!");
 
             Console.Write(mainMenu.GetFullMenu());
 
@@ -266,7 +268,6 @@ namespace bangazoncli
             return userOption;
         }
 
-<<<<<<< HEAD
         static string ChooseProductMenu(List<Product> productData)
         {
 
@@ -285,8 +286,6 @@ namespace bangazoncli
             return userOption;
         }
 
-=======
->>>>>>> master
     }
 }
 
