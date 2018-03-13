@@ -73,15 +73,14 @@ namespace bangazoncli
                     case '4':
 
                         Console.Clear();
-                        var productQuery = new NewProduct();
-                        var productResult = productQuery.InsertProduct("Shoe", "$40", 1);
 
-                        if (productResult)
+                        if (ProductMaker.ProductCreator())
                         {
                             Console.WriteLine("Product added successfully.");
                         }
 
                         Console.ReadLine();
+
                         break;
 
                     case '5':

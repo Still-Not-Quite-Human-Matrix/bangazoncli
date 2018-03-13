@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Configuration;
 
@@ -45,5 +41,29 @@ namespace bangazoncli
 
             }
         }
+    }
+
+    public class ProductMaker
+    {
+        public static bool ProductCreator()
+        {
+            var productQuery = new NewProduct();
+
+            Console.WriteLine("Please type product name:");
+            var productName = Console.ReadLine();
+
+            Console.WriteLine($"How much is {productName}:");
+            var price = Console.ReadLine();
+
+            Console.WriteLine("Enter an customer id... for now:");
+            var owner = int.Parse(Console.ReadLine());
+
+            var result = productQuery.InsertProduct(productName, price, owner);
+
+            Console.WriteLine("Type [0] to return to the main menu.");
+
+            return result;
+        }
+
     }
 }
