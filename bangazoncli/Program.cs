@@ -54,6 +54,19 @@ namespace bangazoncli
 
                     case '3':
 
+                        Console.Clear();
+
+                        if (ThePaymentTypeCreator.PaymentCreator())
+                        {
+                            Console.WriteLine("Payment added successfully.");
+                        }
+
+                        Console.ReadLine();
+
+                        break;
+
+                    case '4':
+
                         var productData = new GetProductData().getProducts();
 
                         View ProductsView = new View().AddMenuText("These are all available products.");
@@ -70,7 +83,7 @@ namespace bangazoncli
 
                         break;
 
-                    case '4':
+                    case '5':
 
                         Console.Clear();
 
@@ -83,8 +96,7 @@ namespace bangazoncli
 
                         break;
 
-
-                    case '5':
+                    case '6':
                         if (activeCustomer != null)
                         {
                             Console.Clear();
@@ -162,7 +174,7 @@ namespace bangazoncli
             View mainMenu = new View()
                 .AddMenuOption("Create a customer account")
                 .AddMenuOption("Choose active customer")
-                //.AddMenuOption("Create a payment option")
+                .AddMenuOption("Create a payment option")
                 .AddMenuOption("(Under Construction, Only displays products) Add product to shopping cart")
                 .AddMenuOption("Add product to sell");
             //.AddMenuOption("Complete an order")
