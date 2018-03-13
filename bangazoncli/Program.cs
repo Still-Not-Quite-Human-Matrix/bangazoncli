@@ -54,6 +54,19 @@ namespace bangazoncli
 
                     case '3':
 
+                        Console.Clear();
+
+                        if (ThePaymentTypeCreator.PaymentCreator())
+                        {
+                            Console.WriteLine("Payment added successfully.");
+                        }
+
+                        Console.ReadLine();
+
+                        break;
+
+                    case '4':
+
                         var productData = new GetProductData().getProducts();
 
                         View ProductsView = new View().AddMenuText("These are all available products.");
@@ -70,7 +83,7 @@ namespace bangazoncli
 
                         break;
 
-                    case '4':
+                    case '5':
 
                         Console.Clear();
 
@@ -83,9 +96,7 @@ namespace bangazoncli
 
                         break;
 
-
-
-                    case '5':
+                    case '6':
                         if (activeCustomer != null)
                         {
                             Console.Clear();
@@ -144,11 +155,6 @@ namespace bangazoncli
                             Console.WriteLine(" Please Select a Customer First. Press [enter] to try again.");
                             Console.ReadKey();
                         }
-                        break;
-
-                    case '6':
-
-
 
                         break;
                 }
@@ -168,16 +174,23 @@ namespace bangazoncli
             View mainMenu = new View()
                 .AddMenuOption("Create a customer account")
                 .AddMenuOption("Choose active customer")
-                //.AddMenuOption("Create a payment option")
+                .AddMenuOption("Create a payment option")
                 .AddMenuOption("(Under Construction, Only displays products) Add product to shopping cart")
-                .AddMenuOption("Add product to sell")
-                .AddMenuOption("Complete an order")
-                //.AddMenuOption("Remove customer product")
-                //.AddMenuOption("Update product information")
-                //.AddMenuOption("Show stale products")
-                //.AddMenuOption("Show customer revenue report")
-                //.AddMenuOption("Show overall product popularity")
-                .AddMenuText("Press [0] To Leave Bangazon!");
+                .AddMenuOption("Add product to sell");
+            //.AddMenuOption("Complete an order")
+            if (activeCustomer != null)
+            {
+                mainMenu.AddMenuOption($"Remove product(s) from {activeCustomer.FirstName} {activeCustomer.LastName}");
+            }
+            else
+            {
+                mainMenu.AddMenuOption($"Select a customer to remove product(s)");
+            };
+            //.AddMenuOption("Update product information")
+            //.AddMenuOption("Show stale products")
+            //.AddMenuOption("Show customer revenue report")
+            //.AddMenuOption("Show overall product popularity")
+            mainMenu.AddMenuText("Press [0] To Leave Bangazon!");
 
             Console.Write(mainMenu.GetFullMenu());
 
@@ -205,7 +218,5 @@ namespace bangazoncli
             return userOption;
         }
 
-
     }
 }
-
