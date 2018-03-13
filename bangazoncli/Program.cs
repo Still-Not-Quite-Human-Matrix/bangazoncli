@@ -8,21 +8,16 @@ using cki = System.ConsoleKeyInfo;
 namespace bangazoncli
 {
     class Program
-
     {
         static void Main(string[] args)
         {
-
             var db = SetupNewApp();
-
             Customer activeCustomer = null;
-
 
             var run = true;
             while (run)
             {
                 cki userInput = MainMenu(activeCustomer);
-
 
                 switch (userInput.KeyChar)
                 {
@@ -33,10 +28,7 @@ namespace bangazoncli
                     case '1':
                         Console.Clear();
 
-                        var customerQuery = new CreateNewCustomer();
-                        var result = customerQuery.InsertCustomer("john", "doe", "1st street", "nashville", "TN", "37064", "5555555555");
-
-                        if (result)
+                        if (TheCustomerAccountMaker.CustomerCreator())
                         {
                             Console.WriteLine("Customer added successfully.");
                         }
@@ -81,21 +73,84 @@ namespace bangazoncli
                     case '4':
 
                         Console.Clear();
-                        var productQuery = new NewProduct();
-                        var productResult = productQuery.InsertProduct("Shoe", "$40");
 
-                        if (productResult)
+                        if (ProductMaker.ProductCreator(activeCustomer.CustomerID))
                         {
                             Console.WriteLine("Product added successfully.");
                         }
 
                         Console.ReadLine();
+
                         break;
 
-                    //case '5':
 
-                        //Console.Clear();
-                        //var 
+
+                    case '5':
+                        if (activeCustomer != null)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("1: Remove Product");
+                            Console.WriteLine("2: Return to Main Menu");
+                            cki productSubSelection = Console.ReadKey();
+                            var remove = true;
+                            while (remove)
+                            {
+                                switch (productSubSelection.KeyChar)
+                                {
+                                    case '0':
+                                        remove = false;
+                                        break;
+
+                                    case '1':
+                                        Console.Clear();
+                                        Console.WriteLine("Type a product id and press enter...");
+                                        // Generate Product Menu //
+                                        var customerProducts = new GetProductList();
+                                        var ProductData = customerProducts.GetProducts(activeCustomer.CustomerID);
+
+                                        foreach (var product in ProductData)
+                                        {
+                                            Console.WriteLine($"{product.ProductID}. {product.Name}: {product.Price}");
+                                        }
+                                        Console.WriteLine("\nPress [0] to return to the main menu");
+
+                                        // Read Input and Remove Product by ID // 
+                                        var selection = Console.ReadLine();
+                                        var productDelete = new RemoveProduct().DeleteProduct(int.Parse(selection));
+                                        if (int.Parse(selection) == 0)
+                                        {
+                                            remove = false;
+                                        }
+                                        else if (productDelete)
+                                        {
+                                            Console.WriteLine("Product deleted press enter to relaod list");
+                                            Console.ReadKey();
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Product not deleted or does not exist");
+                                        }
+                                        //Console.ReadKey();
+                                        break;
+
+                                    case '2':
+                                        remove = false;
+                                        break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine(" Please Select a Customer First. Press [enter] to try again.");
+                            Console.ReadKey();
+                        }
+                        break;
+
+                    case '6':
+
+
+
+                        break;
                 }
             }
         }
@@ -124,7 +179,6 @@ namespace bangazoncli
                 //.AddMenuOption("Show overall product popularity")
                 .AddMenuText("Press [0] To Leave Bangazon!");
 
-
             Console.Write(mainMenu.GetFullMenu());
 
             if (activeCustomer != null)
@@ -134,7 +188,6 @@ namespace bangazoncli
 
             cki userOption = Console.ReadKey();
             return userOption;
-
         }
 
         static cki ChooseActiveCustomerMenu(List<Customer> CustomerData)
@@ -150,10 +203,9 @@ namespace bangazoncli
             Console.Write(ChooseMenu.GetFullMenu());
             cki userOption = Console.ReadKey();
             return userOption;
-
         }
 
-        
+
     }
 }
 
