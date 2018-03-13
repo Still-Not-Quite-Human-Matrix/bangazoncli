@@ -55,14 +55,15 @@ namespace bangazoncli
                     case '3':
 
                         Console.Clear();
+                        var paymentTypeQuery = new CreatePaymentOption();
+                        var paymentTypeResult = paymentTypeQuery.InsertPaymentOption("Amex", 1645);
 
-                        if (ThePaymentTypeCreator.PaymentCreator())
+                        if (paymentTypeResult)
                         {
-                            Console.WriteLine("Payment added successfully.");
+                            Console.WriteLine("Payment type added successfully.");
                         }
 
                         Console.ReadLine();
-
                         break;
 
                     case '4':
@@ -96,7 +97,12 @@ namespace bangazoncli
 
                         break;
 
+<<<<<<< HEAD
                     case '6':
+=======
+
+                    case '5':
+>>>>>>> master
                         if (activeCustomer != null)
                         {
                             Console.Clear();

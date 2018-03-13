@@ -39,4 +39,25 @@ namespace bangazoncli
             }
         }
     }
+    public class ThePaymentTypeCreator
+    {
+        public static bool PaymentCreator()
+        {
+            var paymentQuery = new CreatePaymentOption();
+
+            Console.WriteLine("Enter Payment Type (Amex, Mastercard, Visa, Checking):");
+            var paymentType = Console.ReadLine();
+
+            Console.WriteLine("Enter account number:");
+            var paymentAccountNum = int.Parse(Console.ReadLine());
+
+
+            var result = paymentQuery.InsertPaymentOption(paymentType, paymentAccountNum);
+
+            Console.WriteLine("Type [0] to return to the main menu.");
+
+            return result;
+        }
+    }
+
 }
