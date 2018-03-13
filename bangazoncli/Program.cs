@@ -87,15 +87,14 @@ namespace bangazoncli
                     case '5':
 
                         Console.Clear();
-                        var productQuery = new NewProduct();
-                        var productResult = productQuery.InsertProduct("Shoe", "$40");
 
-                        if (productResult)
+                        if (ProductMaker.ProductCreator(activeCustomer.CustomerID))
                         {
                             Console.WriteLine("Product added successfully.");
                         }
 
                         Console.ReadLine();
+
                         break;
 
                     case '6':
@@ -179,7 +178,7 @@ namespace bangazoncli
                 .AddMenuOption("Create a payment option")
                 .AddMenuOption("(Under Construction, Only displays products) Add product to shopping cart")
                 .AddMenuOption("Add product to sell");
-                //.AddMenuOption("Complete an order")
+            //.AddMenuOption("Complete an order")
             if (activeCustomer != null)
             {
                 mainMenu.AddMenuOption($"Remove product(s) from {activeCustomer.FirstName} {activeCustomer.LastName}");

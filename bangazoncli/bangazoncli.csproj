@@ -50,7 +50,7 @@
     <Compile Include="DatabaseContext.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Products\GetProductData.cs" />
-    <Compile Include="NewProduct.cs" />
+    <Compile Include="Products\NewProduct.cs" />
     <Compile Include="Products\GetProductList.cs" />
     <Compile Include="Products\RemoveProduct.cs" />
     <Compile Include="Program.cs" />

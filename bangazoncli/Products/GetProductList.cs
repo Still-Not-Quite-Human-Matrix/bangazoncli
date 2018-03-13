@@ -10,7 +10,6 @@ namespace bangazoncli.Products
     {
         readonly string _connectionString = ConfigurationManager.ConnectionStrings["SNQHM_bangazoncli_db"].ConnectionString;
 
-        //this will need to be a get products by customer query at this time it returns all products in the DB
         public List<Product> GetProducts(int custID)
         {
             using (var connection = new SqlConnection(_connectionString))
