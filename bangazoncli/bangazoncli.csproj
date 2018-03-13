@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Payments\CreatePaymentOption.cs" />
     <Compile Include="Customers\CreateNewCustomer.cs" />
     <Compile Include="Customers\GetCustomerData.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -55,7 +56,9 @@
     <Compile Include="OrderItems\ShowOrderItems.cs" />
     <Compile Include="Orders\GetOrderData.cs" />
     <Compile Include="Products\GetProductData.cs" />
-    <Compile Include="NewProduct.cs" />
+    <Compile Include="Products\NewProduct.cs" />
+    <Compile Include="Products\GetProductList.cs" />
+    <Compile Include="Products\RemoveProduct.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validators\StringValidator.cs" />

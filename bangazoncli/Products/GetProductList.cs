@@ -1,34 +1,40 @@
-﻿using bangazoncli.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
+using bangazoncli.Models;
 
 namespace bangazoncli.Products
 {
-    class GetProductData
+    class GetProductList
     {
         readonly string _connectionString = ConfigurationManager.ConnectionStrings["SNQHM_bangazoncli_db"].ConnectionString;
 
-        public List<Product> getProducts()
+        public List<Product> GetProducts(int custID)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 var cmd = connection.CreateCommand();
-                cmd.CommandText = @"SELECT [ProductID], [Name], [Price]
-                                        FROM [dbo].[Product]";
+                cmd.CommandText = @"select *
+                                    from Product
+                                    where Owner = @custID";
+
+                var custIDParam = new SqlParameter("@custID", SqlDbType.NVarChar);
+                custIDParam.Value = custID;
+                cmd.Parameters.Add(custIDParam);
 
                 var reader = cmd.ExecuteReader();
 
-                List<Product> products = new List<Product>();
+                var products = new List<Product>();
 
                 while (reader.Read())
                 {
                     var product = new Product
                     {
+                        ProductID = int.Parse(reader["ProductId"].ToString()),
                         Name = reader["Name"].ToString(),
-                        Price = double.Parse(reader["price"].ToString()),
-                        ProductID = int.Parse(reader["ProductID"].ToString())
+                        Price = double.Parse(reader["Price"].ToString()),
                     };
 
                     products.Add(product);
@@ -37,5 +43,6 @@ namespace bangazoncli.Products
                 return products;
             }
         }
+        
     }
 }
