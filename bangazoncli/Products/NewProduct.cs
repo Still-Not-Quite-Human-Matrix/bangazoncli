@@ -45,7 +45,7 @@ namespace bangazoncli
 
     public class ProductMaker
     {
-        public static bool ProductCreator()
+        public static bool ProductCreator(int owner)
         {
             var productQuery = new NewProduct();
 
@@ -55,15 +55,11 @@ namespace bangazoncli
             Console.WriteLine($"How much is {productName}:");
             var price = Console.ReadLine();
 
-            Console.WriteLine("Enter an customer id... for now:");
-            var owner = int.Parse(Console.ReadLine());
-
             var result = productQuery.InsertProduct(productName, price, owner);
 
             Console.WriteLine("Type [0] to return to the main menu.");
 
             return result;
         }
-
     }
 }
