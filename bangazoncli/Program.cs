@@ -4,6 +4,7 @@ using bangazoncli.Models;
 using System;
 using System.Collections.Generic;
 using cki = System.ConsoleKeyInfo;
+using bangazoncli.OrderItems;
 
 namespace bangazoncli
 {
@@ -13,6 +14,7 @@ namespace bangazoncli
         {
             var db = SetupNewApp();
             Customer activeCustomer = null;
+            List<Product> listOfOrderItems = new List<Product>();
 
             var run = true;
             while (run)
@@ -43,9 +45,9 @@ namespace bangazoncli
                         var customerDataQuery = new GetCustomerData();
                         var customerData = customerDataQuery.GetCustomerByName();
 
-                        var chosenCustomer = int.Parse(ChooseActiveCustomerMenu(customerData).KeyChar.ToString());
+                        var chosenCustomer = int.Parse(ChooseActiveCustomerMenu(customerData));
 
-                        if (chosenCustomer != 0)
+                        if (chosenCustomer != 0 && chosenCustomer < customerData.Count + 1)
                         {
                             activeCustomer = customerData[chosenCustomer - 1];
                         }
@@ -54,32 +56,45 @@ namespace bangazoncli
 
                     case '3':
 
-                        Console.Clear();
+                        var productData = new GetProductData().getProducts();
 
-                        if (ThePaymentTypeCreator.PaymentCreator())
+                        if (activeCustomer != null)
                         {
-                            Console.WriteLine("Payment added successfully.");
+                            Console.Clear();
+
+                            if (ThePaymentTypeCreator.PaymentCreator())
+                            {
+                                Console.WriteLine("Payment added successfully.");
+                            }
                         }
+                            Console.ReadLine();
 
-                        Console.ReadLine();
-
-                        break;
+                            break;
 
                     case '4':
 
-                        var productData = new GetProductData().getProducts();
+                        var runThisMenu = true;
 
-                        View ProductsView = new View().AddMenuText("These are all available products.");
-
-                        foreach (var product in productData)
+                        while (runThisMenu)
                         {
-                            ProductsView.AddMenuText($"Product ID: {product.ProductID}, Name: {product.Name}, Price: {product.Price}");
+
+                            var productDataQuery = new GetProductData();
+                            productData = productDataQuery.getProducts();
+
+                            var chosenInput = int.Parse(ChooseProductMenu(productData));
+
+                            if (chosenInput != 0)
+                            {
+                                var chosenProduct = productData[chosenInput - 1];
+                                listOfOrderItems.Add(chosenProduct);
+                            }
+                            else
+                            {
+                                runThisMenu = false;
+                            }
+
                         }
-                        ProductsView.AddMenuText("Press the any key to return to the Main Menu");
 
-                        Console.Write(ProductsView.GetFullMenu());
-
-                        Console.ReadKey();
 
                         break;
 
@@ -157,6 +172,34 @@ namespace bangazoncli
                         }
 
                         break;
+
+                    case '7':
+
+                        if (listOfOrderItems.Count > 0)
+                        {
+                            var itemsList = new ShowOrderItems();
+                            itemsList.ShowListOfItems(listOfOrderItems);
+                        }
+                        else
+                        {
+                            Console.WriteLine("sorry no items in cart");
+                        }
+
+                        break;
+
+                    case '8':
+
+                        if (listOfOrderItems.Count > 0)
+                        {
+                            var itemsList = new RemoveOrderItemsFromList();
+                            itemsList.RemoveFromListOfItems(listOfOrderItems);
+                        }
+                        else
+                        {
+                            Console.WriteLine("sorry no items in cart");
+                        }
+                        break;
+
                 }
             }
         }
@@ -190,7 +233,10 @@ namespace bangazoncli
             //.AddMenuOption("Show stale products")
             //.AddMenuOption("Show customer revenue report")
             //.AddMenuOption("Show overall product popularity")
-            mainMenu.AddMenuText("Press [0] To Leave Bangazon!");
+            mainMenu
+                .AddMenuOption("See products in customer cart")
+                .AddMenuOption("Remove products in customer cart")
+                .AddMenuText("Press [0] To Leave Bangazon!");
 
             Console.Write(mainMenu.GetFullMenu());
 
@@ -198,23 +244,45 @@ namespace bangazoncli
             {
                 Console.WriteLine($"Your current active Customer is {activeCustomer.FirstName} {activeCustomer.LastName}");
             }
+            else
+            {
+                Console.WriteLine("No active customer set");
+            }
 
             cki userOption = Console.ReadKey();
             return userOption;
         }
 
-        static cki ChooseActiveCustomerMenu(List<Customer> CustomerData)
+        static string ChooseActiveCustomerMenu(List<Customer> customerData)
         {
             View ChooseMenu = new View().AddMenuText("Which customer will be active?");
 
-            foreach (var customer in CustomerData)
+            foreach (var customer in customerData)
             {
                 ChooseMenu.AddMenuOption($"Customer ID: {customer.CustomerID} Name: {customer.FirstName} {customer.LastName}");
             }
-            ChooseMenu.AddMenuOption("Exit!");
+            ChooseMenu.AddMenuText("0. Return to Main Menu");
 
             Console.Write(ChooseMenu.GetFullMenu());
-            cki userOption = Console.ReadKey();
+            string userOption = Console.ReadLine();
+            return userOption;
+        }
+
+        static string ChooseProductMenu(List<Product> productData)
+        {
+
+            View ProductsView = new View().AddMenuText("These are all available products.");
+
+            foreach (var product in productData)
+            {
+                ProductsView.AddMenuOption($"Product ID: {product.ProductID}, Name: {product.Name}, Price: {product.Price}");
+            }
+
+            ProductsView.AddMenuText("0. Done adding products");
+
+            Console.Write(ProductsView.GetFullMenu());
+            string userOption = Console.ReadLine();
+
             return userOption;
         }
 
