@@ -4,8 +4,11 @@ using bangazoncli.Models;
 using System;
 using System.Collections.Generic;
 using cki = System.ConsoleKeyInfo;
+<<<<<<< HEAD
 using bangazoncli.Menus;
+=======
 using bangazoncli.OrderItems;
+>>>>>>> master
 
 namespace bangazoncli
 {
@@ -185,6 +188,7 @@ namespace bangazoncli
                 .AddMenuOption("Create a payment option")
                 .AddMenuOption("(Under Construction, Only displays products) Add product to shopping cart")
                 .AddMenuOption("Add product to sell");
+<<<<<<< HEAD
                 //.AddMenuOption("Complete an order")
                 if (activeCustomer != null)
                 {
@@ -199,21 +203,43 @@ namespace bangazoncli
                 //.AddMenuOption("Show customer revenue report")
                 //.AddMenuOption("Show overall product popularity")
                 mainMenu.AddMenuText("Press [0] To Leave Bangazon!");
+=======
+            //.AddMenuOption("Complete an order")
+            if (activeCustomer != null)
+            {
+                mainMenu.AddMenuOption($"Remove product(s) from {activeCustomer.FirstName} {activeCustomer.LastName}");
+            }
+            else
+            {
+                mainMenu.AddMenuOption($"Select a customer to remove product(s)");
+            };
+            //.AddMenuOption("Update product information")
+            //.AddMenuOption("Show stale products")
+            //.AddMenuOption("Show customer revenue report")
+            //.AddMenuOption("Show overall product popularity")
             mainMenu
                 .AddMenuOption("See products in customer cart")
                 .AddMenuOption("Remove products in customer cart")
                 .AddMenuText("Press [0] To Leave Bangazon!");
+>>>>>>> master
 
                 Console.Write(mainMenu.GetFullMenu());
 
+<<<<<<< HEAD
                 if (activeCustomer != null)
                 {
                     Console.WriteLine($"Your current active Customer is {activeCustomer.FirstName} {activeCustomer.LastName}");
                 }
+=======
+            if (activeCustomer != null)
+            {
+                Console.WriteLine($"Your current active Customer is {activeCustomer.FirstName} {activeCustomer.LastName}");
+            }
             else
             {
                 Console.WriteLine("No active customer set");
             }
+>>>>>>> master
 
                 cki userOption = Console.ReadKey();
                 return userOption;
