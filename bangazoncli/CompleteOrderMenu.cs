@@ -1,4 +1,5 @@
 ﻿using bangazoncli.Models;
+using bangazoncli.Payments;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +22,25 @@ namespace bangazoncli
                 total += product.Price;
             }
 
-            Console.WriteLine($"Your order Total is {total} Ready to Purchase?");
+            Console.WriteLine($"Your order Total is {total} Ready to Purchase? (Y/N)");
 
-            View menu = new View()
-                .AddMenuOption("Visa")
-                .AddMenuOption("Amex");
+            var userInput = (Console.ReadLine()).ToUpper();
+
+            if (userInput == "Y")
+            {
+                var paymentData = new GetPaymentData();
+                var customerPaymentData = paymentData.GetPaymentsByCustomerID(activeCustomer.CustomerID);
+
+
+                View menu = new View();
+
+                foreach( var payment in customerPaymentData)
+                {
+                    menu.AddMenuOption(payment.PaymentType);
+                }
+            }
+
+            
 
             return true;
 
