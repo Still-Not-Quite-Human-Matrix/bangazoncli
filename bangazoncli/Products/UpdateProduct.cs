@@ -18,7 +18,6 @@ namespace bangazoncli.Products
                 var cmd = connection.CreateCommand();
                 cmd.CommandText = @"UPDATE [dbo].[Product]
                                     SET [Name] = @Name
-
                                     ,[Price] = @Price
                                     WHERE ProductID = @prodId";
 
