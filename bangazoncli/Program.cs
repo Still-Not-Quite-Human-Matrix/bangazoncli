@@ -111,7 +111,21 @@ namespace bangazoncli
 
                         break;
 
+
                     case '6':
+                        var customerOrderMenu = new CompleteOrderMenu();
+                        var completeCustomerOrder = customerOrderMenu.CompleteOrder(listOfOrderItems, activeCustomer);
+
+                        if (completeCustomerOrder)
+                        {
+                            Console.WriteLine($"you completed your order");
+                        }
+                           
+                        Console.ReadLine();
+
+                        break;
+
+                    case '7':
                         if (activeCustomer != null)
                         {
                             Console.Clear();
@@ -173,7 +187,7 @@ namespace bangazoncli
 
                         break;
 
-                    case '7':
+                    case '8':
 
                         if (listOfOrderItems.Count > 0)
                         {
@@ -187,7 +201,7 @@ namespace bangazoncli
 
                         break;
 
-                    case '8':
+                    case '9':
 
                         if (listOfOrderItems.Count > 0)
                         {
@@ -219,8 +233,8 @@ namespace bangazoncli
                 .AddMenuOption("Choose active customer")
                 .AddMenuOption("Create a payment option")
                 .AddMenuOption("(Under Construction, Only displays products) Add product to shopping cart")
-                .AddMenuOption("Add product to sell");
-            //.AddMenuOption("Complete an order")
+                .AddMenuOption("Add product to sell")
+                .AddMenuOption("Complete an order");
             if (activeCustomer != null)
             {
                 mainMenu.AddMenuOption($"Remove product(s) from {activeCustomer.FirstName} {activeCustomer.LastName}");
