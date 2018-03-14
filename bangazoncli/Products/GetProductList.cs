@@ -16,7 +16,7 @@ namespace bangazoncli.Products
             {
                 connection.Open();
                 var cmd = connection.CreateCommand();
-                cmd.CommandText = @"select *
+                cmd.CommandText = @"select [ProductID], [Name], [Price], [Count], [Description]
                                     from Product
                                     where Owner = @custID";
 
@@ -35,6 +35,8 @@ namespace bangazoncli.Products
                         ProductID = int.Parse(reader["ProductId"].ToString()),
                         Name = reader["Name"].ToString(),
                         Price = double.Parse(reader["Price"].ToString()),
+                        Count = int.Parse(reader["Count"].ToString()),
+                        Description = reader["Description"].ToString()
                     };
 
                     products.Add(product);

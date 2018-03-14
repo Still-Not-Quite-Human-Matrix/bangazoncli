@@ -17,8 +17,10 @@ namespace bangazoncli
                 cmd.CommandText = @"INSERT INTO Product 
                                 (Name,
                                  Price,
-                                 Owner)
-                                VALUES (@Name, @Price, @Owner)";
+                                 Owner,
+                                 Description,
+                                 Count)
+                                VALUES (@Name, @Price, @Owner, @Description, @Count)";
 
 
                 var NameParam = new SqlParameter("@Name", System.Data.SqlDbType.NVarChar);
@@ -32,6 +34,14 @@ namespace bangazoncli
                 var OwnerParam = new SqlParameter("@Owner", System.Data.SqlDbType.Int);
                 OwnerParam.Value = owner;
                 cmd.Parameters.Add(OwnerParam);
+
+                var DescriptionParam = new SqlParameter("@Description", System.Data.SqlDbType.Int);
+                DescriptionParam.Value = owner;
+                cmd.Parameters.Add(DescriptionParam);
+
+                var CountParam = new SqlParameter("@Count", System.Data.SqlDbType.Int);
+                CountParam.Value = owner;
+                cmd.Parameters.Add(CountParam);
 
                 connection.Open();
 

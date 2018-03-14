@@ -54,7 +54,7 @@ namespace bangazoncli.Products
             {
                 connection.Open();
                 var cmd = connection.CreateCommand();
-                cmd.CommandText = @"select *
+                cmd.CommandText = @"select [ProductID], [Name], [Price], [Count], [Description]
                                     from Product
                                     where ProductID = @prodId";
 
@@ -73,6 +73,8 @@ namespace bangazoncli.Products
                         ProductID = int.Parse(reader["ProductId"].ToString()),
                         Name = reader["Name"].ToString(),
                         Price = double.Parse(reader["Price"].ToString()),
+                        Count = int.Parse(reader["Count"].ToString()),
+                        Description = reader["Description"].ToString()
                     };
 
                     products.Add(product);
@@ -98,8 +100,8 @@ namespace bangazoncli.Products
             {
                 Console.WriteLine($"1. Change Name: {field.Name}");
                 Console.WriteLine($"2. Change Price: {field.Price}");
-                Console.WriteLine($"3. Change Price: {field.Description}");
-                Console.WriteLine($"4. Change Price: {field.Count}");
+                Console.WriteLine($"3. Change Description: {field.Description}");
+                Console.WriteLine($"4. Change Count: {field.Count}");
             }
             Console.ReadLine();
 
