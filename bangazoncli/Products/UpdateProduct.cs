@@ -91,20 +91,35 @@ namespace bangazoncli.Products
             var productSelector = new GetProductById();
             productSelector.GetProduct(id);
 
+
+            View productFields = new View();
+            Console.Clear();
+            foreach (var field in productSelector.GetProduct(id))
+            {
+                Console.WriteLine($"1. Change Name: {field.Name}");
+                Console.WriteLine($"2. Change Price: {field.Price}");
+                Console.WriteLine($"3. Change Price: {field.Description}");
+                Console.WriteLine($"4. Change Price: {field.Count}");
+            }
+            Console.ReadLine();
+
+
+
+
             //update selected product accordingly
-            var productQuery = new UpdateProduct();
+            //var productQuery = new UpdateProduct();
 
-            Console.WriteLine("Please type the new product name:");
-            var productName = Console.ReadLine();
+            //Console.WriteLine("Please type the new product name:");
+            //var productName = Console.ReadLine();
 
-            Console.WriteLine($"How much is {productName}:");
-            var price = Console.ReadLine();
+            //Console.WriteLine($"How much is {productName}:");
+            //var price = Console.ReadLine();
 
-            var result = productQuery.productUpdater(productName, price, id);
+            //var result = productQuery.productUpdater(productName, price, id);
 
-            Console.WriteLine("Type [0] to return to the main menu.");
+            //Console.WriteLine("Type [0] to return to the main menu.");
 
-            return result;
+            return true;
         }
     }
 }
