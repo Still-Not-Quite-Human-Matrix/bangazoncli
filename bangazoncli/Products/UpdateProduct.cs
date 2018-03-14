@@ -18,6 +18,7 @@ namespace bangazoncli.Products
                 var cmd = connection.CreateCommand();
                 cmd.CommandText = @"UPDATE [dbo].[Product]
                                     SET [Name] = @Name
+
                                     ,[Price] = @Price
                                     WHERE ProductID = @prodId";
 
@@ -94,7 +95,7 @@ namespace bangazoncli.Products
             //update selected product accordingly
             var productQuery = new UpdateProduct();
 
-            Console.WriteLine("Please type product name:");
+            Console.WriteLine("Please type the new product name:");
             var productName = Console.ReadLine();
 
             Console.WriteLine($"How much is {productName}:");

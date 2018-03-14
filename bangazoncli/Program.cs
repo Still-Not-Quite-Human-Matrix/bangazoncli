@@ -158,30 +158,36 @@ namespace bangazoncli
                         break;
 
                     case '7':
-
-                        Console.Clear();
-
-                        Console.WriteLine("Type a product id and press enter...");
-                        // Generate Product Menu //
-                        var customerProduct = new GetProductList();
-                        var products = customerProduct.GetProducts(activeCustomer.CustomerID);
-
-                        foreach (var product in products)
+                        if (activeCustomer != null)
                         {
-                            Console.WriteLine($"{product.ProductID}. {product.Name}: {product.Price}");
+                            Console.Clear();
+
+                            Console.WriteLine("Type a product id and press enter...");
+                            // Generate Product Menu //
+                            var customerProduct = new GetProductList();
+                            var products = customerProduct.GetProducts(activeCustomer.CustomerID);
+
+                            foreach (var product in products)
+                            {
+                                Console.WriteLine($"{product.ProductID}. {product.Name}: {product.Price}");
+                            }
+                            Console.WriteLine("\nPress [0] to return to the main menu");
+
+                            // Read Input and Remove Product by ID // 
+                            var id = int.Parse(Console.ReadLine());
+
+                            if (ChangeProduct.ProductUpdater(id))
+                            {
+                                Console.WriteLine("Product updated.");
+                            }
+
+                            Console.ReadLine();
                         }
-                        Console.WriteLine("\nPress [0] to return to the main menu");
-
-                        // Read Input and Remove Product by ID // 
-                        var id = int.Parse(Console.ReadLine());
-
-                        if (ChangeProduct.ProductUpdater(id))
+                        else
                         {
-                            Console.WriteLine("Product updated.");
+                            Console.WriteLine(" Please Select a Customer First. Press [enter] to try again.");
+                            Console.ReadKey();
                         }
-
-                        Console.ReadLine();
-
                         break;
                 }
             }
