@@ -27,6 +27,8 @@ namespace bangazoncli.Menus
 
             // Read Input and Remove Product by ID // 
             var id = int.Parse(Console.ReadLine());
+            if (id == 0)
+                return true;
 
             if (ChangeProduct.ProductUpdater(id))
             {

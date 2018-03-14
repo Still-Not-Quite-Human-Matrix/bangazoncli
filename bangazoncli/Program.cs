@@ -138,7 +138,7 @@ namespace bangazoncli
                         }
                         break;
 
-                    case '7':
+                    case '8':
 
                         if (listOfOrderItems.Count > 0)
                         {
@@ -152,7 +152,7 @@ namespace bangazoncli
 
                         break;
 
-                    case '8':
+                    case '9':
 
                         if (listOfOrderItems.Count > 0)
                         {
@@ -194,12 +194,10 @@ namespace bangazoncli
                 {
                     mainMenu.AddMenuOption($"Select a customer to remove product(s)");
                 };
-                mainMenu.AddMenuOption("Update product information");
+                mainMenu.AddMenuOption("Update product information")
                 //.AddMenuOption("Show stale products")
                 //.AddMenuOption("Show customer revenue report")
                 //.AddMenuOption("Show overall product popularity")
-                mainMenu.AddMenuText("Press [0] To Leave Bangazon!");
-            mainMenu
                 .AddMenuOption("See products in customer cart")
                 .AddMenuOption("Remove products in customer cart")
                 .AddMenuText("Press [0] To Leave Bangazon!");
