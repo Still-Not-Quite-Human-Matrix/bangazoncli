@@ -11,6 +11,6 @@ namespace bangazoncli.Models
         public int PaymentID { get; set; }
         public string PaymentType { get; set; }
         public int PaymentAccountNum { get; set; }
-
+        public int CustomerID { get; internal set; }
     }
 }

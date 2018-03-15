@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using cki = System.ConsoleKeyInfo;
 using bangazoncli.OrderItems;
+using bangazoncli.Payments;
 
 namespace bangazoncli
 {
@@ -116,12 +117,17 @@ namespace bangazoncli
                         var customerOrderMenu = new CompleteOrderMenu();
                         var completeCustomerOrder = customerOrderMenu.CompleteOrder(listOfOrderItems, activeCustomer);
 
+                        
+
                         if (completeCustomerOrder)
                         {
-                            Console.WriteLine($"you completed your order");
+                            Console.WriteLine($"You completed your order");
                         }
-                           
+
+                        listOfOrderItems.Clear();
+
                         Console.ReadLine();
+                        
 
                         break;
 

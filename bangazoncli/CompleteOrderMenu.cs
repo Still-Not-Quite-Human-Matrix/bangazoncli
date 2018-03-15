@@ -38,8 +38,10 @@ namespace bangazoncli
                 {
                     menu.AddMenuOption(payment.PaymentType);
                 }
+                Console.WriteLine(menu.GetFullMenu());
             }
 
+            
             
 
             return true;

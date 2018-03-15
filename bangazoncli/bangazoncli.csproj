@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompleteOrderMenu.cs" />
+    <Compile Include="Models\Payment.cs" />
     <Compile Include="Payments\CreatePaymentOption.cs" />
     <Compile Include="Customers\CreateNewCustomer.cs" />
     <Compile Include="Customers\GetCustomerData.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="OrderItems\RemoveOrderItemsFromList.cs" />
     <Compile Include="OrderItems\ShowOrderItems.cs" />
+    <Compile Include="Payments\GetPaymentData.cs" />
     <Compile Include="Products\GetProductData.cs" />
     <Compile Include="Products\NewProduct.cs" />
     <Compile Include="Products\GetProductList.cs" />
