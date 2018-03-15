@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using bangazoncli.Models;
 using System.Data;
 using System.Data.SqlClient;
+using cki = System.ConsoleKeyInfo;
 
 namespace bangazoncli.Products
 {
@@ -11,7 +12,7 @@ namespace bangazoncli.Products
     {
         readonly string _connectionString = ConfigurationManager.ConnectionStrings["SNQHM_bangazoncli_db"].ConnectionString;
 
-        public bool productUpdater(string name, string price, int id)
+        public bool productUpdater(Product product)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -19,20 +20,30 @@ namespace bangazoncli.Products
                 cmd.CommandText = @"UPDATE [dbo].[Product]
                                     SET [Name] = @Name
                                     ,[Price] = @Price
+                                    ,[Description] = @prodDesc
+                                    ,[Count] = @prodCount
                                     WHERE ProductID = @prodId";
 
 
                 var NameParam = new SqlParameter("@Name", SqlDbType.NVarChar);
-                NameParam.Value = name;
+                NameParam.Value = product.Name;
                 cmd.Parameters.Add(NameParam);
 
                 var PriceParam = new SqlParameter("@Price", SqlDbType.Money);
-                PriceParam.Value = price;
+                PriceParam.Value = product.Price;
                 cmd.Parameters.Add(PriceParam);
 
                 var productIdParam = new SqlParameter("@prodId", SqlDbType.Int);
-                productIdParam.Value = id;
+                productIdParam.Value = product.ProductID;
                 cmd.Parameters.Add(productIdParam);
+
+                var productDescParam = new SqlParameter("@prodDesc", SqlDbType.NVarChar);
+                productDescParam.Value = product.Description;
+                cmd.Parameters.Add(productDescParam);
+
+                var productCountParam = new SqlParameter("@prodCount", SqlDbType.Int);
+                productCountParam.Value = product.Count;
+                cmd.Parameters.Add(productCountParam);
 
                 connection.Open();
 
@@ -91,36 +102,67 @@ namespace bangazoncli.Products
         {
             //get product by id from selection
             var productSelector = new GetProductById();
-            productSelector.GetProduct(id);
-
-
-            View productFields = new View();
-            Console.Clear();
+            
+            //create a new product
+            Product newProduct = new Product();
             foreach (var field in productSelector.GetProduct(id))
             {
-                Console.WriteLine($"1. Change Name: {field.Name}");
-                Console.WriteLine($"2. Change Price: {field.Price}");
-                Console.WriteLine($"3. Change Description: {field.Description}");
-                Console.WriteLine($"4. Change Count: {field.Count}");
+                newProduct.ProductID = field.ProductID;
+                newProduct.Name = field.Name;
+                newProduct.Price = field.Price;
+                newProduct.Count = field.Count;
+                newProduct.Description = field.Description;
             }
-            Console.ReadLine();
 
+            cki input;
 
+            Console.Clear();
+            cki ProductSubMenu()
+            { 
+                View productSubMenu = new View();
+                {
+                    productSubMenu
+                        .AddMenuOption($"Change Name: {newProduct.Name}")
+                        .AddMenuOption($"Change Price: {newProduct.Price}")
+                        .AddMenuOption($"Change Description: {newProduct.Description}")
+                        .AddMenuOption($"Change Count: {newProduct.Count}");
+                        //.AddMenuOption("Enter [0] to end editing, save changes, and return to main menu");
+                }
+                Console.Write(productSubMenu.GetFullMenu());
+                Console.WriteLine("Press [0] to save changes and return to main menu");
+                input = Console.ReadKey();
+                return input;
+            }
 
-
-            //update selected product accordingly
-            //var productQuery = new UpdateProduct();
-
-            //Console.WriteLine("Please type the new product name:");
-            //var productName = Console.ReadLine();
-
-            //Console.WriteLine($"How much is {productName}:");
-            //var price = Console.ReadLine();
-
-            //var result = productQuery.productUpdater(productName, price, id);
-
-            //Console.WriteLine("Type [0] to return to the main menu.");
-
+            var productQuery = new UpdateProduct();
+            var update = true; 
+            while (update)
+            {
+                ProductSubMenu();
+                switch (input.KeyChar)
+                {
+                    case '1':
+                        Console.WriteLine("Please type the new product name:");
+                        newProduct.Name = Console.ReadLine();
+                        break;
+                    case '2':
+                        Console.WriteLine($"Updated Price:");
+                        newProduct.Price = double.Parse(Console.ReadLine());
+                        break;
+                    case '3':
+                        Console.WriteLine($"Update Description:");
+                        newProduct.Description = Console.ReadLine();
+                        break;
+                    case '4':
+                        Console.WriteLine($"Update Count:");
+                        newProduct.Count = int.Parse(Console.ReadLine());
+                        break;
+                    case '0':
+                        var result = productQuery.productUpdater(newProduct);
+                        update = false;
+                        break;         
+                } 
+            }
             return true;
         }
     }

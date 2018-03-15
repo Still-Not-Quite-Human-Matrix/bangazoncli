@@ -32,7 +32,7 @@ namespace bangazoncli.Menus
 
             if (ChangeProduct.ProductUpdater(id))
             {
-                Console.WriteLine("Product updated.");
+                Console.WriteLine("Product updated. Press Enter to Continue");
                 Console.ReadLine();
                 return true;
             }

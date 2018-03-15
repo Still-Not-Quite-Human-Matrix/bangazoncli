@@ -208,10 +208,10 @@ namespace bangazoncli
                 {
                     Console.WriteLine($"Your current active Customer is {activeCustomer.FirstName} {activeCustomer.LastName}");
                 }
-            else
-            {
-                Console.WriteLine("No active customer set");
-            }
+                else
+                {
+                    Console.WriteLine("No active customer set");
+                }
 
                 cki userOption = Console.ReadKey();
                 return userOption;
