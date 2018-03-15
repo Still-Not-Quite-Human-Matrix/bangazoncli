@@ -145,6 +145,8 @@ namespace bangazoncli
                         } 
                         break;
 
+<<<<<<< HEAD
+=======
                     case '7':
                         if (activeCustomer != null)
                         {
@@ -158,6 +160,7 @@ namespace bangazoncli
                         }
                         break;
 
+>>>>>>> master
                     case '8':
 
                         if (listOfOrderItems.Count > 0)
@@ -204,8 +207,25 @@ namespace bangazoncli
                 .AddMenuOption("Choose active customer")
                 .AddMenuOption("Create a payment option")
                 .AddMenuOption("(Under Construction, Only displays products) Add product to shopping cart")
+<<<<<<< HEAD
                 .AddMenuOption("Add product to sell")
                 .AddMenuOption("Complete an order");
+            if (activeCustomer != null)
+            {
+                mainMenu.AddMenuOption($"Remove product(s) from {activeCustomer.FirstName} {activeCustomer.LastName}");
+            }
+            else
+            {
+                mainMenu.AddMenuOption($"Select a customer to remove product(s)");
+            };
+            //.AddMenuOption("Update product information")
+            //.AddMenuOption("Show stale products")
+            //.AddMenuOption("Show customer revenue report")
+            //.AddMenuOption("Show overall product popularity")
+            mainMenu
+=======
+                .AddMenuOption("Add product to sell");
+                //.AddMenuOption("Complete an order")
                 if (activeCustomer != null)
                 {
                     mainMenu.AddMenuOption($"Remove product(s) from {activeCustomer.FirstName} {activeCustomer.LastName}");
@@ -218,6 +238,7 @@ namespace bangazoncli
                 //.AddMenuOption("Show stale products")
                 //.AddMenuOption("Show customer revenue report")
                 //.AddMenuOption("Show overall product popularity")
+>>>>>>> master
                 .AddMenuOption("See products in customer cart")
                 .AddMenuOption("Remove products in customer cart")
                 .AddMenuText("Press [0] To Leave Bangazon!");

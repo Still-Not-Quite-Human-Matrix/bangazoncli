@@ -43,9 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="CompleteOrderMenu.cs" />
-    <Compile Include="Menus\ProductMenu.cs" />
     <Compile Include="Models\Payment.cs" />
+=======
+    <Compile Include="Menus\ProductMenu.cs" />
+>>>>>>> master
     <Compile Include="Payments\CreatePaymentOption.cs" />
     <Compile Include="Customers\CreateNewCustomer.cs" />
     <Compile Include="Customers\GetCustomerData.cs" />
