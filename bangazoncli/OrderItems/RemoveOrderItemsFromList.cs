@@ -17,16 +17,16 @@ namespace bangazoncli.OrderItems
 
             foreach (var product in productData)
             {
-                ListView.AddMenuOption($"{product.Name}");
+                ListView.AddMenuOption($"{product.Name}, {product.Price}");
             }
             ListView.AddMenuText("0. Return to Main Menu");
 
             Console.Write(ListView.GetFullMenu());
             string userOption = Console.ReadLine();
 
-            if (productData.Contains(productData[int.Parse(userOption)]))
+            if (productData.Contains(productData[int.Parse(userOption) - 1]))
             {
-                var removed = productData.Remove(productData[int.Parse(userOption)]);
+                var removed = productData.Remove(productData[int.Parse(userOption) - 1]);
             }
 
             return productData;
