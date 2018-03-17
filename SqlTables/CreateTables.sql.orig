@@ -52,8 +52,13 @@ CREATE TABLE [dbo].[Product]
   [Name] VARCHAR(30) NOT NULL,
   [Price] MONEY NOT NULL,
   [Owner] INT NOT NULL,
+<<<<<<< HEAD
+  [Count] INT NOT NULL,
+  [Description] NVARCHAR
+=======
   [Count] [int] NOT NULL,
   [Description] [nvarchar](200) NULL,
+>>>>>>> master
   CONSTRAINT [PK_Product] PRIMARY KEY CLUSTERED ([ProductID])
 );
 GO

@@ -8,4 +8,3 @@ INSERT INTO [dbo].[Product] ([Name],[Price],[Owner],[Count],[Description]) VALUE
 INSERT INTO [dbo].[Product] ([Name],[Price],[Owner],[Count],[Description]) VALUES (N'Inflatable Unicorn Hat',6,4,8,'')
 INSERT INTO [dbo].[Product] ([Name],[Price],[Owner],[Count],[Description]) VALUES (N'Everlasting Dry Erase Markers',204,5,9,'Really they last forever')
 INSERT INTO [dbo].[Product] ([Name],[Price],[Owner],[Count],[Description]) VALUES (N'Adams MacBook',100,5,10,'It is probably worth more, but maybe not')
-
