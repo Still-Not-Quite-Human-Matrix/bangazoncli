@@ -118,17 +118,14 @@ namespace bangazoncli
                         var customerOrderMenu = new CompleteOrderMenu();
                         var completeCustomerOrder = customerOrderMenu.CompleteOrder(listOfOrderItems, activeCustomer);
 
-                        
-
-
                         listOfOrderItems.Clear();
 
+                        var customerChosenPayment = Console.ReadLine();
+                        
                         if (completeCustomerOrder)
                         {
                             Console.WriteLine("You completed your order");
                         }
-                        Console.ReadLine();
-                        
 
                         break;
 

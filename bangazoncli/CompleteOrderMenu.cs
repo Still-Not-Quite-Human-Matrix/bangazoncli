@@ -39,6 +39,9 @@ namespace bangazoncli
                     menu.AddMenuOption(payment.PaymentType);
                 }
                 Console.WriteLine(menu.GetFullMenu());
+
+                // get the users payment type
+                //add that payment type to Order
             }
 
             
