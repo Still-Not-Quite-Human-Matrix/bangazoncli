@@ -29,8 +29,8 @@ CREATE TABLE [dbo].[Product](
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Product]  WITH CHECK ADD  CONSTRAINT [FK_CusomerID] FOREIGN KEY([Owner])
-REFERENCES [dbo].[Customer] ([CustomerID])
+ALTER TABLE [dbo].[Product]  ADD  CONSTRAINT [FK_CusomerID] 
+FOREIGN KEY([Owner]) REFERENCES [dbo].[Customer] ([CustomerID]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 ALTER TABLE [dbo].[Product] CHECK CONSTRAINT [FK_CusomerID]
