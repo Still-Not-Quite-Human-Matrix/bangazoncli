@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using cki = System.ConsoleKeyInfo;
 using bangazoncli.Menus;
 using bangazoncli.OrderItems;
+using bangazoncli.Payments;
 
 namespace bangazoncli
 {
@@ -22,13 +23,13 @@ namespace bangazoncli
             {
                 cki userInput = MainMenu(activeCustomer);
 
-                switch (userInput.KeyChar)
+                switch (userInput.KeyChar.ToString())
                 {
-                    case '0':
+                    case "0":
                         run = false;
                         break;
 
-                    case '1':
+                    case "1":
                         Console.Clear();
 
                         if (TheCustomerAccountMaker.CustomerCreator())
@@ -40,7 +41,7 @@ namespace bangazoncli
 
                         break;
 
-                    case '2':
+                    case "2":
                         Console.Clear();
 
                         var customerDataQuery = new GetCustomerData();
@@ -55,7 +56,7 @@ namespace bangazoncli
 
                         break;
 
-                    case '3':
+                    case "3":
 
                         var productData = new GetProductData().getProducts();
 
@@ -72,7 +73,7 @@ namespace bangazoncli
 
                             break;
 
-                    case '4':
+                    case "4":
 
                         var runThisMenu = true;
 
@@ -99,7 +100,7 @@ namespace bangazoncli
 
                         break;
 
-                    case '5':
+                    case "5":
 
                         Console.Clear();
 
@@ -112,7 +113,23 @@ namespace bangazoncli
 
                         break;
 
-                    case '6':
+
+                    case "6":
+                        var customerOrderMenu = new CompleteOrderMenu();
+                        var completeCustomerOrder = customerOrderMenu.CompleteOrder(listOfOrderItems, activeCustomer);
+
+                        listOfOrderItems.Clear();
+
+                        var customerChosenPayment = Console.ReadLine();
+                        
+                        if (completeCustomerOrder)
+                        {
+                            Console.WriteLine("You completed your order");
+                        }
+
+                        break;
+
+                    case "7":
                         if (activeCustomer != null)
                         {
                             var menu = new ProductMenus();
@@ -125,7 +142,7 @@ namespace bangazoncli
                         } 
                         break;
 
-                    case '7':
+                    case "8":
                         if (activeCustomer != null)
                         {
                             var menu = new ProductMenus();
@@ -138,7 +155,8 @@ namespace bangazoncli
                         }
                         break;
 
-                    case '8':
+                    case "" +
+                    "9":
 
                         if (listOfOrderItems.Count > 0)
                         {
@@ -152,7 +170,7 @@ namespace bangazoncli
 
                         break;
 
-                    case '9':
+                    case "10":
 
                         if (listOfOrderItems.Count > 0)
                         {
@@ -184,8 +202,8 @@ namespace bangazoncli
                 .AddMenuOption("Choose active customer")
                 .AddMenuOption("Create a payment option")
                 .AddMenuOption("(Under Construction, Only displays products) Add product to shopping cart")
-                .AddMenuOption("Add product to sell");
-                //.AddMenuOption("Complete an order")
+                .AddMenuOption("Add product to sell")
+                .AddMenuOption("Complete an order");
                 if (activeCustomer != null)
                 {
                     mainMenu.AddMenuOption($"Remove product(s) from {activeCustomer.FirstName} {activeCustomer.LastName}");
@@ -252,4 +270,3 @@ namespace bangazoncli
 
     }
 }
-
