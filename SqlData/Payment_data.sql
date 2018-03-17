@@ -1,3 +1,3 @@
-INSERT INTO [dbo].[Payment] ([PaymentType],[PaymentAccountNum]) VALUES (N'Amex', 7045)
-INSERT INTO [dbo].[Payment] ([PaymentType],[PaymentAccountNum]) VALUES (N'Mastercard', 4567)
-INSERT INTO [dbo].[Payment] ([PaymentType],[PaymentAccountNum]) VALUES (N'Checking Account', 0456)
+INSERT INTO [dbo].[Payment] ([PaymentType],[PaymentAccountNum],[CusID]) VALUES (N'Amex', 7045,1)
+INSERT INTO [dbo].[Payment] ([PaymentType],[PaymentAccountNum],[CusID]) VALUES (N'Mastercard', 4567,2)
+INSERT INTO [dbo].[Payment] ([PaymentType],[PaymentAccountNum],[CusID]) VALUES (N'Checking Account', 0456,3)
