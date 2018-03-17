@@ -21,9 +21,9 @@ namespace bangazoncli
             var run = true;
             while (run)
             {
-                cki userInput = MainMenu(activeCustomer);
+                string userInput = MainMenu(activeCustomer);
 
-                switch (userInput.KeyChar.ToString())
+                switch (userInput)
                 {
                     case "0":
                         run = false;
@@ -64,7 +64,7 @@ namespace bangazoncli
                         {
                             Console.Clear();
 
-                            if (ThePaymentTypeCreator.PaymentCreator())
+                            if (ThePaymentTypeCreator.PaymentCreator(activeCustomer.CustomerID))
                             {
                                 Console.WriteLine("Payment added successfully.");
                             }
@@ -194,14 +194,14 @@ namespace bangazoncli
             return db;
         }
 
-        static cki MainMenu(Customer activeCustomer)
+        static string MainMenu(Customer activeCustomer)
         {
 
             View mainMenu = new View()
                 .AddMenuOption("Create a customer account")
                 .AddMenuOption("Choose active customer")
                 .AddMenuOption("Create a payment option")
-                .AddMenuOption("(Under Construction, Only displays products) Add product to shopping cart")
+                .AddMenuOption("Add product to shopping cart")
                 .AddMenuOption("Add product to sell")
                 .AddMenuOption("Complete an order");
                 if (activeCustomer != null)
@@ -226,12 +226,12 @@ namespace bangazoncli
                 {
                     Console.WriteLine($"Your current active Customer is {activeCustomer.FirstName} {activeCustomer.LastName}");
                 }
-            else
-            {
-                Console.WriteLine("No active customer set");
-            }
+                else
+                {
+                    Console.WriteLine("No active customer set");
+                }
 
-                cki userOption = Console.ReadKey();
+                string userOption = Console.ReadLine();
                 return userOption;
         }
 

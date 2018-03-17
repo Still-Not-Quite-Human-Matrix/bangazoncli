@@ -12,15 +12,16 @@ namespace bangazoncli
     {
         readonly string _connectionString = ConfigurationManager.ConnectionStrings["SNQHM_bangazoncli_db"].ConnectionString;
 
-        public bool InsertPaymentOption(string paymentType, int paymentAccountNum)
+        public bool InsertPaymentOption(string paymentType, int paymentAccountNum, int activeCustomer)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
                 var cmd = connection.CreateCommand();
                 cmd.CommandText = @"INSERT INTO Payment 
                                 (PaymentType,
-                                 PaymentAccountNum)
-                                VALUES (@PaymentType, @PaymentAccountNum)";
+                                 PaymentAccountNum,
+                                 CusID)
+                                VALUES (@PaymentType, @PaymentAccountNum, @CustomerID)";
 
                 var PaymentTypeParam = new SqlParameter("@PaymentType", System.Data.SqlDbType.NVarChar);
                 PaymentTypeParam.Value = paymentType;
@@ -29,6 +30,10 @@ namespace bangazoncli
                 var PaymentAccountNumParam = new SqlParameter("@PaymentAccountNum", System.Data.SqlDbType.Int);
                 PaymentAccountNumParam.Value = paymentAccountNum;
                 cmd.Parameters.Add(PaymentAccountNumParam);
+
+                var custIDParam = new SqlParameter("@CustomerID", System.Data.SqlDbType.Int);
+                custIDParam.Value = activeCustomer;
+                cmd.Parameters.Add(custIDParam);
 
                 connection.Open();
 
@@ -41,7 +46,7 @@ namespace bangazoncli
     }
     public class ThePaymentTypeCreator
     {
-        public static bool PaymentCreator()
+        public static bool PaymentCreator(int activeCustomer)
         {
             var paymentQuery = new CreatePaymentOption();
 
@@ -52,7 +57,7 @@ namespace bangazoncli
             var paymentAccountNum = int.Parse(Console.ReadLine());
 
 
-            var result = paymentQuery.InsertPaymentOption(paymentType, paymentAccountNum);
+            var result = paymentQuery.InsertPaymentOption(paymentType, paymentAccountNum, activeCustomer);
 
             Console.WriteLine("Type [0] to return to the main menu.");
 

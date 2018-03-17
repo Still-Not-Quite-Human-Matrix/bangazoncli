@@ -24,9 +24,9 @@ namespace bangazoncli.OrderItems
             Console.Write(ListView.GetFullMenu());
             string userOption = Console.ReadLine();
 
-            if (productData.Contains(productData[int.Parse(userOption)]))
+            if (productData.Contains(productData[int.Parse(userOption)-1]))
             {
-                var removed = productData.Remove(productData[int.Parse(userOption)]);
+                var removed = productData.Remove(productData[int.Parse(userOption)-1]);
             }
 
             return productData;

@@ -9,7 +9,7 @@ namespace bangazoncli
     {
         readonly string _connectionString = ConfigurationManager.ConnectionStrings["SNQHM_bangazoncli_db"].ConnectionString;
 
-        public bool InsertProduct(string name, string price, int owner)
+        public bool InsertProduct(string name, double price, int owner, int count, string description)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -17,10 +17,12 @@ namespace bangazoncli
                 cmd.CommandText = @"INSERT INTO Product 
                                 (Name,
                                  Price,
-                                 Owner)
-                                VALUES (@Name, @Price, @Owner)";
+                                 Owner,
+                                 Description,
+                                 Count)
+                                VALUES (@Name, @Price, @Owner, @Description, @Count)";
 
-
+                        
                 var NameParam = new SqlParameter("@Name", System.Data.SqlDbType.NVarChar);
                 NameParam.Value = name;
                 cmd.Parameters.Add(NameParam);
@@ -32,6 +34,14 @@ namespace bangazoncli
                 var OwnerParam = new SqlParameter("@Owner", System.Data.SqlDbType.Int);
                 OwnerParam.Value = owner;
                 cmd.Parameters.Add(OwnerParam);
+
+                var DescriptionParam = new SqlParameter("@Description", System.Data.SqlDbType.NVarChar);
+                DescriptionParam.Value = description;
+                cmd.Parameters.Add(DescriptionParam);
+
+                var CountParam = new SqlParameter("@Count", System.Data.SqlDbType.Int);
+                CountParam.Value = count;
+                cmd.Parameters.Add(CountParam);
 
                 connection.Open();
 
@@ -52,10 +62,16 @@ namespace bangazoncli
             Console.WriteLine("Please type product name:");
             var productName = Console.ReadLine();
 
-            Console.WriteLine($"How much is {productName}:");
-            var price = Console.ReadLine();
+            Console.WriteLine($"How much is {productName}?:");
+            var price = double.Parse(Console.ReadLine());
 
-            var result = productQuery.InsertProduct(productName, price, owner);
+            Console.WriteLine($"Provide a description for {productName}:");
+            var description = Console.ReadLine();
+
+            Console.WriteLine($"How many {productName} do you have to sell?:");
+            var count = int.Parse(Console.ReadLine());
+
+            var result = productQuery.InsertProduct(productName, price, owner, count, description);
 
             Console.WriteLine("Type [0] to return to the main menu.");
 

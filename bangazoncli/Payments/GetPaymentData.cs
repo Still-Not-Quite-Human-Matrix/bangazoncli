@@ -20,7 +20,7 @@ namespace bangazoncli.Payments
             {
                 connection.Open();
                 var cmd = connection.CreateCommand();
-                cmd.CommandText = @"Select [PaymentID], [PaymentType], [PaymentAccountNum], [CustomerID]
+                cmd.CommandText = @"Select [PaymentID], [PaymentType], [PaymentAccountNum], [CusID]
                                 From [dbo].[Payment]";
 
                 var reader = cmd.ExecuteReader();
@@ -34,7 +34,7 @@ namespace bangazoncli.Payments
                         PaymentID = int.Parse(reader["PaymentID"].ToString()),
                         PaymentType = reader["PaymentType"].ToString(),
                         PaymentAccountNum = int.Parse(reader["PaymentAccountNum"].ToString()),
-                        CustomerID = int.Parse(reader["CustomerID"].ToString())
+                        CustomerID = int.Parse(reader["CusID"].ToString())
                     };
 
                     customerPayments.Add(payment);
