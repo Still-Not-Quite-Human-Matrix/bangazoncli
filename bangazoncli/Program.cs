@@ -64,7 +64,7 @@ namespace bangazoncli
                         {
                             Console.Clear();
 
-                            if (ThePaymentTypeCreator.PaymentCreator())
+                            if (ThePaymentTypeCreator.PaymentCreator(activeCustomer.CustomerID))
                             {
                                 Console.WriteLine("Payment added successfully.");
                             }
