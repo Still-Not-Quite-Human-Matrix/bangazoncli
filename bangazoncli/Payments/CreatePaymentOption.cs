@@ -20,7 +20,7 @@ namespace bangazoncli
                 cmd.CommandText = @"INSERT INTO Payment 
                                 (PaymentType,
                                  PaymentAccountNum,
-                                 CustomerID)
+                                 CusID)
                                 VALUES (@PaymentType, @PaymentAccountNum, @CustomerID)";
 
                 var PaymentTypeParam = new SqlParameter("@PaymentType", System.Data.SqlDbType.NVarChar);
@@ -32,7 +32,7 @@ namespace bangazoncli
                 cmd.Parameters.Add(PaymentAccountNumParam);
 
                 var custIDParam = new SqlParameter("@CustomerID", System.Data.SqlDbType.Int);
-                custIDParam.Value = paymentAccountNum;
+                custIDParam.Value = activeCustomer;
                 cmd.Parameters.Add(custIDParam);
 
                 connection.Open();

@@ -9,7 +9,7 @@ namespace bangazoncli
     {
         readonly string _connectionString = ConfigurationManager.ConnectionStrings["SNQHM_bangazoncli_db"].ConnectionString;
 
-        public bool InsertProduct(string name, string price, int owner, int count, string description)
+        public bool InsertProduct(string name, double price, int owner, int count, string description)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -63,7 +63,7 @@ namespace bangazoncli
             var productName = Console.ReadLine();
 
             Console.WriteLine($"How much is {productName}?:");
-            var price = Console.ReadLine();
+            var price = double.Parse(Console.ReadLine());
 
             Console.WriteLine($"Provide a description for {productName}:");
             var description = Console.ReadLine();
