@@ -35,21 +35,13 @@ namespace bangazoncli
                 OwnerParam.Value = owner;
                 cmd.Parameters.Add(OwnerParam);
 
-                var DescriptionParam = new SqlParameter("@Description", System.Data.SqlDbType.Int);
-                DescriptionParam.Value = owner;
+                var DescriptionParam = new SqlParameter("@Description", System.Data.SqlDbType.NVarChar);
+                DescriptionParam.Value = description;
                 cmd.Parameters.Add(DescriptionParam);
-
-                var CountParam = new SqlParameter("@Count", System.Data.SqlDbType.Int);
-                CountParam.Value = owner;
-                cmd.Parameters.Add(CountParam);
 
                 var CountParam = new SqlParameter("@Count", System.Data.SqlDbType.Int);
                 CountParam.Value = count;
                 cmd.Parameters.Add(CountParam);
-
-                var DescParam = new SqlParameter("@Desc", System.Data.SqlDbType.NVarChar);
-                DescParam.Value = description;
-                cmd.Parameters.Add(DescParam);
 
                 connection.Open();
 
