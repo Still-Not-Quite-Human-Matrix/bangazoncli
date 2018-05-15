@@ -57,6 +57,7 @@
     <Compile Include="Products\GetProductData.cs" />
     <Compile Include="Products\NewProduct.cs" />
     <Compile Include="Products\GetProductList.cs" />
+    <Compile Include="Products\ProductPopularity.cs" />
     <Compile Include="Products\RemoveProduct.cs" />
     <Compile Include="Products\UpdateProduct.cs" />
     <Compile Include="Program.cs" />

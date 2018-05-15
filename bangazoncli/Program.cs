@@ -197,7 +197,7 @@ namespace bangazoncli
                 mainMenu.AddMenuOption("Update product information")
                 //.AddMenuOption("Show stale products")
                 //.AddMenuOption("Show customer revenue report")
-                //.AddMenuOption("Show overall product popularity")
+                .AddMenuOption("Show overall product popularity")
                 .AddMenuOption("See products in customer cart")
                 .AddMenuOption("Remove products in customer cart")
                 .AddMenuText("Press [0] To Leave Bangazon!");
